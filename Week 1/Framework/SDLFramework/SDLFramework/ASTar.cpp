@@ -60,6 +60,8 @@ AStar::AStar(Node *startNode, Node *targetNode){
 			//sort(mOpenList.begin(), mOpenList.end(), distanceSort1());
 
 			AStarNode *first = mOpenList.at(0);
+			//first = mOpenList.at(mOpenList.size() - 1);
+			//mOpenList.pop_back();
 			mClosedList.push_back(first);
 			mOpenList.erase(mOpenList.begin());
 			first->mDistance += currentNode->mDistance;
