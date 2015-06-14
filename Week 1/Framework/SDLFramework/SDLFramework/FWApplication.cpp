@@ -228,11 +228,10 @@ void FWApplication::handleEvent(){
 			cow->reset(node, (Node *)mTarget);
 		}
 
-		if (newNode->mCharacter == nullptr){
-			cow->mCurrentLocation = newNode;
-			newNode->setCharacter(cow);
-			node->mCharacter = nullptr;
-		}
+		cow->mCurrentLocation = newNode;
+		mCow = (IGameObject *)cow;
+		newNode->setCharacter(cow);
+		node->mCharacter = nullptr;
 	}
 }
 

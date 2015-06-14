@@ -14,5 +14,5 @@ Node* Cow::moveToNextLocation(){
 
 void Cow::reset(Node *startNode, Node *targetNode){
 	delete mAStar;
-	mAStar = new AStar(startNode, targetNode);
+	//mAStar = new AStar(startNode, targetNode);
 }
