@@ -15,10 +15,11 @@ public:
 	void addNeighbour(Node *node, int value);
 	int GetX();
 	int GetY();
-	Character *mCharacter;
+	Character *mCharacter = nullptr;
 	void setCharacter(Character *character);
-private:
 	vector<IGameObject *> mNeighbours;
+	bool hasCharacter();
+private:
 
 };
 

@@ -35,9 +35,14 @@ int Node::GetY(){
 	return mY;
 }
 
+bool Node::hasCharacter(){
+	return mCharacter != nullptr;
+}
+
 void Node::addNeighbour(Node *node, int value){
 	Waypoint *waypoint = new Waypoint(this, node, value);
 	mNeighbours.push_back((IGameObject *)waypoint);
+	node->mNeighbours.push_back((IGameObject *)waypoint);
 }
 
 void Node::setCharacter(Character *character){

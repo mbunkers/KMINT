@@ -247,6 +247,7 @@ public:
 	void Quit();
 	//void AddOnEvent(std::function<void(SDL_Event*)> func);
 	void setup();
+	void handleEvent();
 
 private:
 	std::vector<IGameObject *> mGameObjects;
@@ -269,6 +270,10 @@ private:
 	uint32_t mFontSize;
 	//uint32_t mColor;
 
+	IGameObject *mCow;
+	IGameObject *mTarget;
+
+	
 };
 
 #endif

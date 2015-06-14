@@ -84,6 +84,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ASTar.cpp" />
+    <ClCompile Include="AStarNode.cpp" />
     <ClCompile Include="Bunny.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Cow.cpp" />
@@ -96,6 +98,8 @@
     <None Include="SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AStar.h" />
+    <ClInclude Include="AStarNode.h" />
     <ClInclude Include="Bunny.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Config.h" />

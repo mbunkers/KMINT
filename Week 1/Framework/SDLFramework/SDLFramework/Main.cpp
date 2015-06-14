@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Config.h"
 #include "FWApplication.h"
+#include "InputManager.h"
 
 #ifdef __APPLE__
 #include <SDL2/SDL_events.h>
@@ -14,6 +15,7 @@
 #include <time.h>
 
 int main(int argc, char *args[]){
+	srand((int)time(0));
 	//auto window = Window::CreateSDLWindow();
 	auto application = new FWApplication();
 	if (!application->GetWindow())
@@ -41,7 +43,9 @@ int main(int argc, char *args[]){
 				break;
 			case SDL_KEYDOWN:
 				switch (event.key.keysym.sym){
-
+				case SDLK_SPACE:
+					application->handleEvent();
+					break;
 				default:
 					break;
 				}

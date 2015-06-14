@@ -8,7 +8,7 @@ class Waypoint : IGameObject{
 private:
 	int mDistance = 0;
 	class Node *mFirstNode = nullptr;
-	class Node *mSecondNode;
+	class Node *mSecondNode = nullptr;
 public:
 	Waypoint(Node *node1, Node *node2, int distance);
 	~Waypoint();

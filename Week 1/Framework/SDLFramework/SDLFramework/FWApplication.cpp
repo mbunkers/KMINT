@@ -10,6 +10,7 @@
 #include "Node.h"
 #include "Cow.h"
 #include "Bunny.h"
+#include "AStar.h"
 
 FWApplication * FWApplication::mInstance;
 FWApplication::FWApplication(int offsetX, int offsetY, int width, int height)
@@ -92,8 +93,13 @@ void FWApplication::setup(){
 	Cow *cow = new Cow(LoadTexture("cow-1.png"));
 	Bunny *bunny = new Bunny(LoadTexture("rabbit-2.png"));
 
-	node1->setCharacter(cow);
+	node2->setCharacter(cow);
+	cow->mCurrentLocation = node2;
 	node3->setCharacter(bunny);
+	mCow = (IGameObject *)cow;
+	mTarget = (IGameObject *)node3;
+
+	cow->reset(node2, node3);
 }
 
 //Node* FWApplication::createNode(int x, int y){
@@ -188,6 +194,46 @@ void FWApplication::StartTick()
 	//		mIsRunning = false;
 	//	}
 	//}
+}
+
+void FWApplication::handleEvent(){
+	Cow *cow = (Cow *)mCow;
+	Node *node = cow->mCurrentLocation;
+
+	if (node->mNeighbours.size() > 0){
+
+		AStar *pathFinding = new AStar(node, (Node *)mTarget);
+		Node *newNode = pathFinding->getNextNode();
+
+		//newNode = cow->moveToNextLocation();
+
+		if (newNode->mCharacter != nullptr){
+			// Move bunny
+			Node *newBunnyNode = nullptr;
+
+			while (newBunnyNode == nullptr){
+				int size = mGameObjects.size();
+				int random = (0 + rand() % (int)size);
+
+				Node *candidateNode = (Node *)mGameObjects.at(random);
+				if (!candidateNode->hasCharacter()){
+					newBunnyNode = candidateNode;
+				}
+			}
+
+			Bunny *bunny = (Bunny *)newNode->mCharacter;
+			newBunnyNode->setCharacter(bunny);
+			newNode->mCharacter = nullptr;
+			mTarget = (IGameObject *)newBunnyNode;
+			cow->reset(node, (Node *)mTarget);
+		}
+
+		if (newNode->mCharacter == nullptr){
+			cow->mCurrentLocation = newNode;
+			newNode->setCharacter(cow);
+			node->mCharacter = nullptr;
+		}
+	}
 }
 
 void FWApplication::EndTick()
