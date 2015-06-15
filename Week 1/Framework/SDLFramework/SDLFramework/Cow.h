@@ -9,7 +9,7 @@ public:
 	~Cow();
 
 	Node *mCurrentLocation;
-	Node *moveToNextLocation();
+	Node *moveToNextLocation(Node *startNode, Node *targetNode);
 
 	void reset(Node *startNode, Node *targetNode);
 

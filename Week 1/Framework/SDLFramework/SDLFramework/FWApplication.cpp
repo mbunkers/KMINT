@@ -71,7 +71,7 @@ FWApplication::FWApplication(int offsetX, int offsetY, int width, int height)
 }
 
 void FWApplication::setup(){
-	Node *node1 = new Node(300, 100, 50, 50, LoadTexture("node.png"));
+	Node *node1 = new Node(200, 50, 50, 50, LoadTexture("node.png"));
 	Node *node2 = new Node(150, 150, 50, 50, LoadTexture("node.png"));
 	Node *node3 = new Node(500, 130, 50, 50, LoadTexture("node.png"));
 	Node *node4 = new Node(430, 65, 50, 50, LoadTexture("node.png"));
@@ -201,11 +201,7 @@ void FWApplication::handleEvent(){
 	Node *node = cow->mCurrentLocation;
 
 	if (node->mNeighbours.size() > 0){
-
-		AStar *pathFinding = new AStar(node, (Node *)mTarget);
-		Node *newNode = pathFinding->getNextNode();
-
-		//newNode = cow->moveToNextLocation();
+		Node *newNode = cow->moveToNextLocation(node, (Node *)mTarget);
 
 		if (newNode->mCharacter != nullptr){
 			// Move bunny
@@ -225,7 +221,6 @@ void FWApplication::handleEvent(){
 			newBunnyNode->setCharacter(bunny);
 			newNode->mCharacter = nullptr;
 			mTarget = (IGameObject *)newBunnyNode;
-			cow->reset(node, (Node *)mTarget);
 		}
 
 		cow->mCurrentLocation = newNode;

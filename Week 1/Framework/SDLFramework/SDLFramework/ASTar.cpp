@@ -1,6 +1,8 @@
 #include "AStar.h"
 #include <math.h>  
 #include <algorithm>
+#include <string>
+#include <iostream>
 
 AStar::AStar(Node *startNode, Node *targetNode){
 	AStarNode *currentNode = new AStarNode(startNode, 0, DistanceBetween(startNode, targetNode));
@@ -13,7 +15,7 @@ AStar::AStar(Node *startNode, Node *targetNode){
 			Waypoint *waypoint = (Waypoint *)currentNode->mNode->mNeighbours.at(i);
 
 			if (!isInOpenList(waypoint->OtherNode(currentNode->mNode)) && waypoint->OtherNode(currentNode->mNode) != startNode){
-				AStarNode *newNode = new AStarNode(waypoint->OtherNode(currentNode->mNode), waypoint->Distance(), DistanceBetween(waypoint->OtherNode(currentNode->mNode), targetNode));
+				AStarNode *newNode = new AStarNode(waypoint->OtherNode(currentNode->mNode), currentNode->mDistance, DistanceBetween(waypoint->OtherNode(currentNode->mNode), targetNode));
 				bool present = false;
 				for (size_t i = 0; i < mClosedList.size(); i++){
 					AStarNode *aStarNode = mClosedList.at(i);
@@ -42,30 +44,16 @@ AStar::AStar(Node *startNode, Node *targetNode){
 				}
 			};
 
-			struct distanceSort1 {
-				bool operator ()(AStarNode * const a, AStarNode * const b) const {
-					return ((a->mDistance) < (b->mDistance));
-					return true;
-				}
-			};
-
-			struct distanceSort2 {
-				bool operator ()(AStarNode * const a, AStarNode * const b) const {
-					return ((a->mDistanceToTravel) < (b->mDistanceToTravel));
-					return true;
-				}
-			};
-
 			sort(mOpenList.begin(), mOpenList.end(), distanceSort());
-			//sort(mOpenList.begin(), mOpenList.end(), distanceSort1());
 
 			AStarNode *first = mOpenList.at(0);
-			//first = mOpenList.at(mOpenList.size() - 1);
-			//mOpenList.pop_back();
-			mClosedList.push_back(first);
+			first = mOpenList.at(mOpenList.size() - 1);
+			mOpenList.pop_back();
+			
 			mOpenList.erase(mOpenList.begin());
 			first->mDistance += currentNode->mDistance;
-			currentNode = first;
+			mClosedList.push_back(first);
+			currentNode = mClosedList.at(mClosedList.size() - 1);
 			
 
 			if (currentNode->mNode == targetNode){
@@ -86,7 +74,7 @@ bool AStar::isInOpenList(Node *node){
 }
 
 Node * AStar::getNextNode(){
- 	return mClosedList.at(1)->mNode;
+ 	return mClosedList.at(0)->mNode;
 }
 
 AStar::~AStar(){
