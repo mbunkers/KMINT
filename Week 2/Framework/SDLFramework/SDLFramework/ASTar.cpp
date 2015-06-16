@@ -8,7 +8,7 @@ AStar::AStar(Node *startNode, Node *targetNode){
 	if (startNode == nullptr){
 		return;
 	}
-	AStarNode *currentNode = new AStarNode(startNode, 0, DistanceBetween(startNode, targetNode));
+	AStarNode *currentNode = new AStarNode(startNode, 0, (int)DistanceBetween(startNode, targetNode));
 	mOpenList.push_back(currentNode);
 
 	bool foundTarget = false;
@@ -19,7 +19,7 @@ AStar::AStar(Node *startNode, Node *targetNode){
 
 			if (waypoint->OtherNode(currentNode->mNode) != nullptr){
 				if (!isInOpenList(waypoint->OtherNode(currentNode->mNode)) && waypoint->OtherNode(currentNode->mNode) != startNode){
-					AStarNode *newNode = new AStarNode(waypoint->OtherNode(currentNode->mNode), currentNode->mDistance, DistanceBetween(waypoint->OtherNode(currentNode->mNode), targetNode));
+					AStarNode *newNode = new AStarNode(waypoint->OtherNode(currentNode->mNode), currentNode->mDistance,(int)DistanceBetween(waypoint->OtherNode(currentNode->mNode), targetNode));
 					bool present = false;
 					for (size_t i = 0; i < mClosedList.size(); i++){
 						AStarNode *aStarNode = mClosedList.at(i);

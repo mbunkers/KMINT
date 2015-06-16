@@ -8,9 +8,10 @@
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 #include "Node.h"
+#include "AStar.h"
 #include "Cow.h"
 #include "Bunny.h"
-#include "AStar.h"
+#include "Item.h"
 
 FWApplication * FWApplication::mInstance;
 FWApplication::FWApplication(int offsetX, int offsetY, int width, int height)
@@ -98,6 +99,16 @@ void FWApplication::setup(){
 	node3->setCharacter(bunny);
 	mCow = (IGameObject *)cow;
 	mBunny = (IGameObject *)bunny;
+
+	int size = mGameObjects.size();
+	int random = (0 + rand() % (int)size);
+
+	Node *candidateNode = (Node *)mGameObjects.at(random);
+	candidateNode->mItem = new Item(LoadTexture("pill.png"));
+	candidateNode->mItem->setNewPosition(candidateNode->GetX(), candidateNode->GetY());
+	candidateNode->mItem->mCurrentLocation = candidateNode;
+
+	mItem = candidateNode->mItem;
 }
 
 //Node* FWApplication::createNode(int x, int y){
@@ -194,45 +205,63 @@ void FWApplication::StartTick()
 	//}
 }
 
+IGameObject * FWApplication::getBunny(){
+	return mBunny;
+}
+
+IGameObject * FWApplication::getCow(){
+	return mCow;
+}
+
+IGameObject * FWApplication::getItem(){
+	return mItem;
+}
+
 void FWApplication::handleEvent(){
 	Cow *cow = (Cow *)mCow;
 	Bunny *bunny = (Bunny *)mBunny;
+	
+
+	bunny->move();
 	cow->move();
-	if (bunny->mCurrentLocation == nullptr){
-		Node *newBunnyNode = nullptr;
 
-		while (newBunnyNode == nullptr){
-			int size = mGameObjects.size();
-			int random = (0 + rand() % (int)size);
+	if (cow->mCurrentState->mMoveTarget){
+		if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
+			if (cow->mCurrentLocation->mCharacters.size() > 1){
+				Node *newBunnyNode = nullptr;
 
-			Node *candidateNode = (Node *)mGameObjects.at(random);
-			if (!candidateNode->hasCharacter()){
-				newBunnyNode = candidateNode;
+				while (newBunnyNode == nullptr){
+					int size = mGameObjects.size();
+					int random = (0 + rand() % (int)size);
+
+					Node *candidateNode = (Node *)mGameObjects.at(random);
+					if (!candidateNode->hasCharacter()){
+						newBunnyNode = candidateNode;
+					}
+				}
+
+				newBunnyNode->setCharacter(bunny);
+				bunny->mCurrentLocation = newBunnyNode;
+				cow->changeState();
 			}
 		}
+		if (dynamic_cast<SearchState *>(cow->mCurrentState)){
+			if (cow->mCurrentLocation->mItem != nullptr){
+				
+				int size = mGameObjects.size();
+				int random = (0 + rand() % (int)size);
 
-		newBunnyNode->setCharacter(bunny);
-		bunny->mCurrentLocation = newBunnyNode;
+				Node *candidateNode = (Node *)mGameObjects.at(random);
+				if (candidateNode != cow->mCurrentLocation){
+					candidateNode->mItem = cow->mCurrentLocation->mItem;
+					cow->mCurrentLocation->mItem = nullptr;
+					candidateNode->mItem->setNewPosition(candidateNode->GetX(), candidateNode->GetY());
+				}
+
+				cow->changeState();
+			}
+		}
 	}
-	else {
-		bunny->move();
-	}
-
-
-	//Node *node = cow->mCurrentLocation;
-
-	//if (node->mNeighbours.size() > 0){
-	//	Node *newNode = cow->moveToNextLocation(node, (Node *)mTarget);
-
-	//	if (newNode->mCharacter != nullptr){
-	//		
-	//	}
-
-	//	cow->mCurrentLocation = newNode;
-	//	mCow = (IGameObject *)cow;
-	//	newNode->setCharacter(cow);
-	//	node->mCharacter = nullptr;
-	//  } 
 }
 
 void FWApplication::EndTick()

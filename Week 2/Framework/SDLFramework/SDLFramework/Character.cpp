@@ -13,6 +13,10 @@ void Character::Draw(){
 	IGameObject::Draw();
 }
 
+SDL_Texture * Character::getTexture(){
+	return GetTexture();
+}
+
 void Character::Update(float deltaTime){
 	//IGameObject::Update(deltaTime);
 }

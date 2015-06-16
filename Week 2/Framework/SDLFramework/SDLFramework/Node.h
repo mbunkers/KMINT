@@ -5,6 +5,7 @@
 #include "Waypoint.h"
 #include "Character.h"
 #include <vector>
+#include "Item.h"
 using namespace std;
 
 class Node : IGameObject{
@@ -15,7 +16,8 @@ public:
 	void addNeighbour(Node *node, int value);
 	int GetX();
 	int GetY();
-	vector<Character *> mCharacters = vector<Character *>();
+	Item *mItem = nullptr;
+	vector<class Character *> mCharacters = vector<class Character *>();
 	void setCharacter(Character *character);
 	void removeCharacter(Character *character);
 	vector<IGameObject *> mNeighbours;

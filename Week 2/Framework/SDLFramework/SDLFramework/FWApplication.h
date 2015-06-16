@@ -249,6 +249,10 @@ public:
 	void setup();
 	void handleEvent();
 
+	class IGameObject *getBunny();
+	class IGameObject *getCow();
+	class IGameObject *getItem();
+
 private:
 	std::vector<IGameObject *> mGameObjects;
 	static FWApplication * mInstance;
@@ -272,6 +276,7 @@ private:
 
 	IGameObject *mCow;
 	IGameObject *mBunny;
+	IGameObject *mItem;
 };
 
 #endif

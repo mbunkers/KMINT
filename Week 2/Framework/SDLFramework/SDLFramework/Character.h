@@ -17,6 +17,7 @@ public:
 	void Draw();
 	void Update(float deltaTime);
 	void setNewPosition(int x, int y);
+	SDL_Texture *getTexture();
 };
 
 #endif

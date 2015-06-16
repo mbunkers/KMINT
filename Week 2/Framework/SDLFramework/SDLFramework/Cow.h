@@ -9,6 +9,8 @@
 #include "ChaseState.h"
 
 class Cow : public Character{
+private: 
+	int mStateChangeCounter = 3;
 public:
 	Cow(SDL_Texture *texture, Node *startNode);
 	~Cow();
@@ -16,10 +18,11 @@ public:
 	
 	Node *moveToNextLocation(Node *startNode, Node *targetNode);
 	void move();
-	void update();
+	void Update(float dt);
 	void changeTarget(Character *target);
 	void changeTarget(Cow *target);
 	void reset(Node *startNode, Node *targetNode);
+	void changeState();
 
 	AStar *mAStar;
 };

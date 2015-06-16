@@ -31,8 +31,8 @@ void WanderingState::Move(){
 
 		if (mOwner->mCurrentLocation != nullptr){
 			mOwner->mCurrentLocation->removeCharacter(mOwner);
-			waypoint->OtherNode(mOwner->mCurrentLocation)->setCharacter(mOwner);
-			mOwner->mCurrentLocation = waypoint->OtherNode(mOwner->mCurrentLocation);
 		}
+		waypoint->OtherNode(mOwner->mCurrentLocation)->setCharacter(mOwner);
+		mOwner->mCurrentLocation = waypoint->OtherNode(mOwner->mCurrentLocation);
 	}
 }

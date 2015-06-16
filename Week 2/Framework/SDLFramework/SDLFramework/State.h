@@ -12,6 +12,7 @@ public:
 	class IGameObject *mTarget;
 	class Character *mOwner;
 	bool mFinished;
+	bool mMoveTarget = false;
 
 	virtual void Move();
 	virtual void Update();

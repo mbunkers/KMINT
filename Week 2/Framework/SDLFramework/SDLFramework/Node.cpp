@@ -10,7 +10,10 @@ Node::Node(int x, int y, int width, int height, SDL_Texture *texture){
 }
 
 void Node::Update(float dt){
-
+	for (size_t i = 0; i < mCharacters.size(); i++){
+		Character *character = mCharacters.at(i);
+		character->Update(dt);
+	}
 }
 
 void Node::Draw(){
@@ -26,6 +29,10 @@ void Node::Draw(){
 	for (size_t i = 0; i < mCharacters.size(); i++){
 		Character *character = mCharacters.at(i);
 		character->Draw();
+	}
+
+	if (mItem != nullptr){
+		mItem->Draw();
 	}
 }
 
