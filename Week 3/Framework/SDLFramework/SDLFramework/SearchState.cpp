@@ -6,7 +6,6 @@ SearchState::SearchState() : State(){
 	mMoveTarget = true;
 }
 
-
 SearchState::~SearchState(){
 }
 
@@ -25,4 +24,8 @@ void SearchState::Move(){
 	}
 	mOwner->mCurrentLocation = newNode;
 	mOwner->mCurrentLocation->setCharacter(mOwner);
+
+	if (mOwner->mCurrentLocation->mItem == target){
+		mOwner->changeState();
+	}
 }

@@ -90,11 +90,13 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="ChaseState.cpp" />
     <ClCompile Include="Cow.cpp" />
+    <ClCompile Include="FleeState.cpp" />
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="SearchState.cpp" />
+    <ClCompile Include="SleepState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="WanderingState.cpp" />
     <ClCompile Include="Waypoint.cpp" />
@@ -110,11 +112,13 @@
     <ClInclude Include="ChaseState.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Cow.h" />
+    <ClInclude Include="FleeState.h" />
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="SearchState.h" />
+    <ClInclude Include="SleepState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="WanderingState.h" />
     <ClInclude Include="Waypoint.h" />

@@ -241,7 +241,9 @@ void FWApplication::handleEvent(){
 				}
 
 				newBunnyNode->setCharacter(bunny);
+				bunny->mCurrentLocation->removeCharacter(bunny);
 				bunny->mCurrentLocation = newBunnyNode;
+				bunny->changeState();
 				cow->changeState();
 			}
 		}

@@ -24,3 +24,7 @@ void Character::Update(float deltaTime){
 void Character::setNewPosition(int x, int y){
 	SetOffset(x, y);
 }
+
+void Character::changeState(){
+
+}

@@ -18,6 +18,7 @@ public:
 	void Update(float deltaTime);
 	void setNewPosition(int x, int y);
 	SDL_Texture *getTexture();
+	virtual void changeState();
 };
 
 #endif
