@@ -13,6 +13,7 @@ void ChaseState::Move(){
 	Character *target = (Character *)mTarget;
 	AStar *aStar = new AStar(mOwner->mCurrentLocation, target->mCurrentLocation);
 	Node *newNode = aStar->getNextNode();
+	delete aStar;
 
 	if (newNode == nullptr){
 		return;

@@ -252,6 +252,7 @@ public:
 	class IGameObject *getBunny();
 	class IGameObject *getCow();
 	class IGameObject *getItem();
+	class IGameObject *getWeapon();
 
 private:
 	std::vector<IGameObject *> mGameObjects;
@@ -277,6 +278,7 @@ private:
 	IGameObject *mCow;
 	IGameObject *mBunny;
 	IGameObject *mItem;
+	IGameObject *mWeapon;
 };
 
 #endif

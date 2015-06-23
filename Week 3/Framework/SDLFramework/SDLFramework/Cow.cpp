@@ -1,5 +1,6 @@
 #include "Cow.h"
 #include "WanderingState.h"
+#include "SleepState.h"
 #include "FWApplication.h"
 #include "SDL_render.h"
 
@@ -17,6 +18,21 @@ Cow::~Cow(){
 
 void Cow::move(){
 	mCurrentState->Move();
+}
+
+void Cow::wakeup(){
+	SDL_Texture *texture = getTexture();
+	mCurrentState = new ChaseState();
+	mCurrentState->mTarget = FWApplication::GetInstance()->getBunny();
+	SDL_SetTextureColorMod(texture, 0, 255, 0);
+	mCurrentState->mOwner = this;
+}
+
+void Cow::sleep(){
+	SDL_Texture *texture = getTexture();
+	mCurrentState = new SleepState();
+	mCurrentState->mOwner = this;
+	SDL_SetTextureColorMod(texture, 100, 100, 100);
 }
 
 void Cow::changeState(){

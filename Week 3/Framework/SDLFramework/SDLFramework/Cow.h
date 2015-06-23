@@ -23,6 +23,8 @@ public:
 	void changeTarget(Cow *target);
 	void reset(Node *startNode, Node *targetNode);
 	void changeState();
+	void sleep();
+	void wakeup();
 
 	AStar *mAStar;
 };

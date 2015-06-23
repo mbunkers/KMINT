@@ -28,3 +28,15 @@ void Character::setNewPosition(int x, int y){
 void Character::changeState(){
 
 }
+
+void Character::flee(){
+
+}
+
+void Character::sleep(){
+
+}
+
+void Character::wakeup(){
+
+}

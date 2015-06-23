@@ -100,15 +100,27 @@ void FWApplication::setup(){
 	mCow = (IGameObject *)cow;
 	mBunny = (IGameObject *)bunny;
 
-	int size = mGameObjects.size();
-	int random = (0 + rand() % (int)size);
+	vector<string> items = vector<string>();
+	items.push_back("pill.png");
+	items.push_back("gun-metal.png");
 
-	Node *candidateNode = (Node *)mGameObjects.at(random);
-	candidateNode->mItem = new Item(LoadTexture("pill.png"));
-	candidateNode->mItem->setNewPosition(candidateNode->GetX(), candidateNode->GetY());
-	candidateNode->mItem->mCurrentLocation = candidateNode;
+	for (size_t i = 0; i < items.size(); i++){
+		int size = mGameObjects.size();
+		int random = (0 + rand() % (int)size);
 
-	mItem = candidateNode->mItem;
+		Node *candidateNode = (Node *)mGameObjects.at(random);
+		candidateNode->mItem = new Item(LoadTexture(items.at(i)));
+		candidateNode->mItem->setNewPosition(candidateNode->GetX(), candidateNode->GetY());
+		candidateNode->mItem->mCurrentLocation = candidateNode;
+
+		if (items.at(i) == "pill.png"){
+			mItem = candidateNode->mItem;
+		}
+		else {
+			candidateNode->mItem->mIsWeapon = true;
+			mWeapon = candidateNode->mItem;
+		}
+	}
 }
 
 //Node* FWApplication::createNode(int x, int y){
@@ -217,10 +229,13 @@ IGameObject * FWApplication::getItem(){
 	return mItem;
 }
 
+IGameObject * FWApplication::getWeapon(){
+	return mWeapon;
+}
+
 void FWApplication::handleEvent(){
 	Cow *cow = (Cow *)mCow;
 	Bunny *bunny = (Bunny *)mBunny;
-	
 
 	bunny->move();
 	cow->move();
@@ -228,23 +243,68 @@ void FWApplication::handleEvent(){
 	if (cow->mCurrentState->mMoveTarget){
 		if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
 			if (cow->mCurrentLocation->mCharacters.size() > 1){
-				Node *newBunnyNode = nullptr;
+				if (bunny->mItem != nullptr && bunny->mItem->mIsWeapon){
+					
+					cow->sleep();
+					bunny->flee();
+				}
+				else {
+					// Check state of bunny
+					Character *characterToMove = bunny;
+					Character *otherCharacter = cow;
+					if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
+						characterToMove = cow;
+						otherCharacter = bunny;
+					}
+					Node *newNode = nullptr;
 
-				while (newBunnyNode == nullptr){
-					int size = mGameObjects.size();
-					int random = (0 + rand() % (int)size);
+					while (newNode == nullptr){
+						int size = mGameObjects.size();
+						int random = (0 + rand() % (int)size);
 
-					Node *candidateNode = (Node *)mGameObjects.at(random);
-					if (!candidateNode->hasCharacter()){
-						newBunnyNode = candidateNode;
+						Node *candidateNode = (Node *)mGameObjects.at(random);
+						if (!candidateNode->hasCharacter()){
+							newNode = candidateNode;
+						}
+					}
+
+					newNode->setCharacter(characterToMove);
+					characterToMove->mCurrentLocation->removeCharacter(characterToMove);
+					characterToMove->mCurrentLocation = newNode;
+					characterToMove->changeState();
+					otherCharacter->changeState();
+				}
+			}
+			else if (dynamic_cast<ChaseState *>(bunny->mCurrentState)){
+				if (bunny->mItem != nullptr){
+					if (bunny->mItem->mIsWeapon){
+						for (size_t i = 0; i < bunny->mCurrentLocation->mNeighbours.size(); i++){
+							Waypoint *waypoint = (Waypoint *)bunny->mCurrentLocation->mNeighbours.at(i);
+							Node *node = waypoint->OtherNode(bunny->mCurrentLocation);
+							if (node->hasCharacter()){
+
+								Node *newNode = nullptr;
+
+								while (newNode == nullptr){
+									int size = mGameObjects.size();
+									int random = (0 + rand() % (int)size);
+
+									Node *candidateNode = (Node *)mGameObjects.at(random);
+									if (!candidateNode->hasCharacter()){
+										newNode = candidateNode;
+									}
+								}
+
+								newNode->setCharacter(cow);
+								cow->mCurrentLocation->removeCharacter(cow);
+								cow->mCurrentLocation = newNode;
+								cow->changeState();
+								bunny->changeState();
+								break;
+							}
+						}
 					}
 				}
-
-				newBunnyNode->setCharacter(bunny);
-				bunny->mCurrentLocation->removeCharacter(bunny);
-				bunny->mCurrentLocation = newBunnyNode;
-				bunny->changeState();
-				cow->changeState();
 			}
 		}
 		if (dynamic_cast<SearchState *>(cow->mCurrentState)){
