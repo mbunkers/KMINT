@@ -15,7 +15,7 @@ AStar::AStar(Node *startNode, Node *targetNode){
 			Waypoint *waypoint = (Waypoint *)currentNode->mNode->mNeighbours.at(i);
 
 			if (!isInOpenList(waypoint->OtherNode(currentNode->mNode)) && waypoint->OtherNode(currentNode->mNode) != startNode){
-				AStarNode *newNode = new AStarNode(waypoint->OtherNode(currentNode->mNode), currentNode->mDistance, DistanceBetween(waypoint->OtherNode(currentNode->mNode), targetNode));
+				AStarNode *newNode = new AStarNode(waypoint->OtherNode(currentNode->mNode), currentNode->mDistance, (int)DistanceBetween(waypoint->OtherNode(currentNode->mNode), targetNode));
 				bool present = false;
 				for (size_t i = 0; i < mClosedList.size(); i++){
 					AStarNode *aStarNode = mClosedList.at(i);
@@ -40,17 +40,17 @@ AStar::AStar(Node *startNode, Node *targetNode){
 			struct distanceSort {
 				bool operator ()(AStarNode * const a, AStarNode * const b) const {
 					return ((a->mDistance + a->mDistanceToTravel) > (b->mDistance + b->mDistanceToTravel));
-						return true;
 				}
 			};
 
 			sort(mOpenList.begin(), mOpenList.end(), distanceSort());
 
-			AStarNode *first = mOpenList.at(0);
-			first = mOpenList.at(mOpenList.size() - 1);
+			AStarNode *first = mOpenList.at(mOpenList.size() - 1);
+			if (first->mNode->mCharacter == startNode->mCharacter){
+				first = mOpenList.at(mOpenList.size() - 2);
+				mOpenList.pop_back();
+			}
 			mOpenList.pop_back();
-			
-			mOpenList.erase(mOpenList.begin());
 			first->mDistance += currentNode->mDistance;
 			mClosedList.push_back(first);
 			currentNode = mClosedList.at(mClosedList.size() - 1);
@@ -83,8 +83,8 @@ AStar::~AStar(){
 }
 
 double AStar::DistanceBetween(Node *a, Node *b){
-	double x = a->GetX() - b->GetX();
-	double y = a->GetX() - b->GetX();
+	double x = b->GetX() - a->GetX();
+	double y = b->GetX() - a->GetX();
 
 	double distance = 0;
 
