@@ -15,8 +15,9 @@ public:
 	void addNeighbour(Node *node, int value);
 	int GetX();
 	int GetY();
-	Character *mCharacter = nullptr;
+	vector<class Character *> mCharacters = vector<class Character *>();
 	void setCharacter(Character *character);
+	void removeCharacter(Character *character);
 	vector<IGameObject *> mNeighbours;
 	bool hasCharacter();
 private:

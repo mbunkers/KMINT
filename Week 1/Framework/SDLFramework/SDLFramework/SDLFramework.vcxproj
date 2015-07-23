@@ -88,10 +88,12 @@
     <ClCompile Include="AStarNode.cpp" />
     <ClCompile Include="Bunny.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="ChaseState.cpp" />
     <ClCompile Include="Cow.cpp" />
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="Waypoint.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -102,11 +104,13 @@
     <ClInclude Include="AStarNode.h" />
     <ClInclude Include="Bunny.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="ChaseState.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Cow.h" />
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="Waypoint.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,4 +1,4 @@
-﻿Build started 21/07/15 22:07:40.
+﻿Build started 24/07/15 00:26:22.
      1>Project "Z:\marcbunkers\Avans\KMINT\Week 1\Framework\SDLFramework\SDLFramework\SDLFramework.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"Z:\marcbunkers\Avans\KMINT\Week 1\Framework\SDLFramework\SDLFramework\../../SDL2-2.0.3/include" /I"Z:\marcbunkers\Avans\KMINT\Week 1\Framework\SDLFramework\SDLFramework\../../SDL2_ttf-2.0.12/include" /I"Z:\marcbunkers\Avans\KMINT\Week 1\Framework\SDLFramework\SDLFramework\../../SDL2_image-2.0.0/include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ASTar.cpp
@@ -9,14 +9,16 @@
          Debug\AStarNode.obj
          Debug\Bunny.obj
          Debug\Character.obj
+         Debug\ChaseState.obj
          Debug\Cow.obj
          Debug\FWApplication.obj
          Debug\Main.obj
          Debug\Node.obj
+         Debug\State.obj
          Debug\Waypoint.obj
          SDLFramework.vcxproj -> Z:\marcbunkers\Avans\KMINT\Week 1\Framework\SDLFramework\Debug\SDLFramework.exe
      1>Done Building Project "Z:\marcbunkers\Avans\KMINT\Week 1\Framework\SDLFramework\SDLFramework\SDLFramework.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.66
+Time Elapsed 00:00:05.03

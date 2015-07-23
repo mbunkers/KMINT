@@ -1,19 +1,19 @@
 #include "Cow.h"
 
-Cow::Cow(SDL_Texture *texture) : Character(texture){
-
+Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
+	mCurrentLocation = startNode;
+	mCurrentState = new ChaseState();
+	mCurrentState->mOwner = this;
 }
 
 
 Cow::~Cow(){
 }
 
-Node* Cow::moveToNextLocation(Node *startNode, Node *targetNode){
-	reset(startNode, targetNode);
-	return mAStar->getNextNode();
+void Cow::move(){
+	mCurrentState->Move();
 }
 
-void Cow::reset(Node *startNode, Node *targetNode){
-	delete mAStar;
-	mAStar = new AStar(startNode, targetNode);
+void Cow::changeTarget(Character *target){
+	mCurrentState->setTarget(target);
 }

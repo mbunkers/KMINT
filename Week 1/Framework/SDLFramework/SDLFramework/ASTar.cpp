@@ -46,7 +46,7 @@ AStar::AStar(Node *startNode, Node *targetNode){
 			sort(mOpenList.begin(), mOpenList.end(), distanceSort());
 
 			AStarNode *first = mOpenList.at(mOpenList.size() - 1);
-			if (first->mNode->mCharacter == startNode->mCharacter){
+			if (first->mNode == startNode){
 				first = mOpenList.at(mOpenList.size() - 2);
 				mOpenList.pop_back();
 			}
@@ -84,7 +84,7 @@ AStar::~AStar(){
 
 double AStar::DistanceBetween(Node *a, Node *b){
 	double x = b->GetX() - a->GetX();
-	double y = b->GetX() - a->GetX();
+	double y = b->GetY() - a->GetY();
 
 	double distance = 0;
 

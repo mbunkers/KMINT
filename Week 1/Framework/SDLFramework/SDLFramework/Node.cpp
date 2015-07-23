@@ -6,10 +6,14 @@ Node::Node(int x, int y, int width, int height, SDL_Texture *texture){
 	SetSize(width, height);
 	SetTexture(texture);
 	mNeighbours = vector<IGameObject *>();
+	mCharacters = vector<Character *>();
 }
 
 void Node::Update(float dt){
-
+	for (size_t i = 0; i < mCharacters.size(); i++){
+		Character *character = mCharacters.at(i);
+		character->Update(dt);
+	}
 }
 
 void Node::Draw(){
@@ -22,8 +26,9 @@ void Node::Draw(){
 		FWApplication::GetInstance()->DrawLine(mX, mY, node->GetX(), node->GetY());
 	}
 
-	if (mCharacter != nullptr){
-		mCharacter->Draw();
+	for (size_t i = 0; i < mCharacters.size(); i++){
+		Character *character = mCharacters.at(i);
+		character->Draw();
 	}
 }
 
@@ -36,7 +41,7 @@ int Node::GetY(){
 }
 
 bool Node::hasCharacter(){
-	return mCharacter != nullptr;
+	return mCharacters.size() > 0;
 }
 
 void Node::addNeighbour(Node *node, int value){
@@ -46,6 +51,16 @@ void Node::addNeighbour(Node *node, int value){
 }
 
 void Node::setCharacter(Character *character){
-	mCharacter = character;
-	mCharacter->setNewPosition(GetX(), GetY());
+	character->setNewPosition(GetX(), GetY());
+	mCharacters.push_back(character);
+}
+
+void Node::removeCharacter(Character *character){
+	for (size_t i = 0; i < mCharacters.size(); i++){
+		Character *testCharacter = mCharacters.at(i);
+		if (character == testCharacter){
+			mCharacters.erase(mCharacters.begin() + i);
+			return;
+		}
+	}
 }

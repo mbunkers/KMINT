@@ -90,22 +90,15 @@ void FWApplication::setup(){
 	AddRenderable((IGameObject *)node4);
 	AddRenderable((IGameObject *)node5);
 
-	Cow *cow = new Cow(LoadTexture("cow-1.png"));
-	Bunny *bunny = new Bunny(LoadTexture("rabbit-2.png"));
+	Cow *cow = new Cow(LoadTexture("cow-1.png"), node2);
+	Bunny *bunny = new Bunny(LoadTexture("rabbit-2.png"), node3);
+	cow->changeTarget(bunny);
 
 	node2->setCharacter(cow);
-	cow->mCurrentLocation = node2;
 	node3->setCharacter(bunny);
 	mCow = (IGameObject *)cow;
-	mTarget = (IGameObject *)node3;
-
-	cow->reset(node2, node3);
+	mTarget = (IGameObject *)bunny;
 }
-
-//Node* FWApplication::createNode(int x, int y){
-//	return new Node(x, y, 20, 20, LoadTexture("node.png"));
-//}
-
 
 FWApplication::~FWApplication()
 {
@@ -198,12 +191,12 @@ void FWApplication::StartTick()
 
 void FWApplication::handleEvent(){
 	Cow *cow = (Cow *)mCow;
-	Node *node = cow->mCurrentLocation;
+	Bunny *bunny = (Bunny *)mTarget;
 
-	if (node->mNeighbours.size() > 0){
-		Node *newNode = cow->moveToNextLocation(node, (Node *)mTarget);
+	if (cow->mCurrentLocation->mNeighbours.size() > 0){
+		cow->move();
 
-		if (newNode->mCharacter != nullptr){
+		if (cow->mCurrentLocation->mCharacters.size() > 1){
 			// Move bunny
 			Node *newBunnyNode = nullptr;
 
@@ -217,16 +210,10 @@ void FWApplication::handleEvent(){
 				}
 			}
 
-			Bunny *bunny = (Bunny *)newNode->mCharacter;
 			newBunnyNode->setCharacter(bunny);
-			newNode->mCharacter = nullptr;
-			mTarget = (IGameObject *)newBunnyNode;
+			bunny->mCurrentLocation->removeCharacter(bunny);
+			bunny->mCurrentLocation = newBunnyNode;
 		}
-
-		cow->mCurrentLocation = newNode;
-		mCow = (IGameObject *)cow;
-		newNode->setCharacter(cow);
-		node->mCharacter = nullptr;
 	}
 }
 

@@ -2,17 +2,15 @@
 #include "Character.h"
 #include "Node.h"
 #include "AStar.h"
+#include "ChaseState.h"
 
 class Cow : public Character{
 public:
-	Cow(SDL_Texture *texture);
+	Cow(SDL_Texture *texture, Node *startNode);
 	~Cow();
 
-	Node *mCurrentLocation;
-	Node *moveToNextLocation(Node *startNode, Node *targetNode);
-
-	void reset(Node *startNode, Node *targetNode);
-
+	void move();
+	void changeTarget(Character *target);
 	AStar *mAStar;
 };
 
