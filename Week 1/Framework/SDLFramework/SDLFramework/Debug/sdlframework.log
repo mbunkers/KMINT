@@ -1,4 +1,4 @@
-﻿Build started 24/07/15 00:26:22.
+﻿Build started 26/07/15 13:34:26.
      1>Project "Z:\marcbunkers\Avans\KMINT\Week 1\Framework\SDLFramework\SDLFramework\SDLFramework.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"Z:\marcbunkers\Avans\KMINT\Week 1\Framework\SDLFramework\SDLFramework\../../SDL2-2.0.3/include" /I"Z:\marcbunkers\Avans\KMINT\Week 1\Framework\SDLFramework\SDLFramework\../../SDL2_ttf-2.0.12/include" /I"Z:\marcbunkers\Avans\KMINT\Week 1\Framework\SDLFramework\SDLFramework\../../SDL2_image-2.0.0/include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ASTar.cpp
@@ -21,4 +21,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.03
+Time Elapsed 00:00:03.92

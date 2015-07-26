@@ -6,7 +6,6 @@
 
 AStar::AStar(Node *startNode, Node *targetNode){
 	AStarNode *currentNode = new AStarNode(startNode, 0, DistanceBetween(startNode, targetNode));
-	mOpenList.push_back(currentNode);
 
 	bool foundTarget = false;
 
@@ -15,15 +14,15 @@ AStar::AStar(Node *startNode, Node *targetNode){
 			Waypoint *waypoint = (Waypoint *)currentNode->mNode->mNeighbours.at(i);
 
 			if (!isInOpenList(waypoint->OtherNode(currentNode->mNode)) && waypoint->OtherNode(currentNode->mNode) != startNode){
-				AStarNode *newNode = new AStarNode(waypoint->OtherNode(currentNode->mNode), currentNode->mDistance, (int)DistanceBetween(waypoint->OtherNode(currentNode->mNode), targetNode));
+				AStarNode *newNode = new AStarNode(waypoint->OtherNode(currentNode->mNode), currentNode->mDistance + (int)DistanceBetween(currentNode->mNode, waypoint->OtherNode(currentNode->mNode)), (int)DistanceBetween(waypoint->OtherNode(currentNode->mNode), targetNode));
 				bool present = false;
 				for (size_t i = 0; i < mClosedList.size(); i++){
 					AStarNode *aStarNode = mClosedList.at(i);
 					if (aStarNode->mNode == waypoint->OtherNode(currentNode->mNode)){
 						
 						if (aStarNode->mDistance + aStarNode->mDistanceToTravel < currentNode->mDistance + currentNode->mDistanceToTravel){
-							mOpenList.erase(mOpenList.begin() + i);
-							mOpenList.push_back(newNode);
+							//mOpenList.erase(mOpenList.begin() + i);
+							//mOpenList.push_back(newNode);
 						}
 
 						present = true;
@@ -46,19 +45,13 @@ AStar::AStar(Node *startNode, Node *targetNode){
 			sort(mOpenList.begin(), mOpenList.end(), distanceSort());
 
 			AStarNode *first = mOpenList.at(mOpenList.size() - 1);
-			if (first->mNode == startNode){
-				first = mOpenList.at(mOpenList.size() - 2);
-				mOpenList.pop_back();
-			}
 			mOpenList.pop_back();
 			first->mDistance += currentNode->mDistance;
 			mClosedList.push_back(first);
 			currentNode = mClosedList.at(mClosedList.size() - 1);
-			
-
-			if (currentNode->mNode == targetNode){
-				foundTarget = true;
-			}
+		}
+		else {
+			foundTarget = true;
 		}
 	}
 }
