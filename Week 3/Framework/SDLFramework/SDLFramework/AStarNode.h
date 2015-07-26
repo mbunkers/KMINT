@@ -1,6 +1,4 @@
-#ifndef __ASTARNODE__
-#define __ASTARNODE__
-
+#pragma once
 
 #include "Node.h"
 
@@ -8,12 +6,10 @@ class AStarNode{
 private:
 
 public:
-	AStarNode(Node *node, int distance, int distanceToTravel);
+	AStarNode(Node *node, double distance, double distanceToTravel);
 	~AStarNode();
 
-	int mDistance = 1;
-	int mDistanceToTravel = 0;
+	double mDistance = 1;
+	double mDistanceToTravel = 0;
 	Node *mNode = nullptr;
 };
-
-#endif

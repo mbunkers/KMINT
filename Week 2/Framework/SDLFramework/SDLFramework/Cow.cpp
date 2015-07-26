@@ -55,13 +55,3 @@ void Cow::Update(float dt){
 void Cow::changeTarget(Character *target){
 	mCurrentState->setTarget(target);
 }
-
-Node* Cow::moveToNextLocation(Node *startNode, Node *targetNode){
-	reset(startNode, targetNode);
-	return mAStar->getNextNode();
-}
-
-void Cow::reset(Node *startNode, Node *targetNode){
-	delete mAStar;
-	mAStar = new AStar(startNode, targetNode);
-}

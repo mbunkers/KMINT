@@ -24,3 +24,10 @@ void Character::Update(float deltaTime){
 void Character::setNewPosition(int x, int y){
 	SetOffset(x, y);
 }
+
+string Character::StateName(){
+	if (mCurrentState == nullptr){
+		return "Onbekende staat";
+	}
+	return mCurrentState->name();
+}

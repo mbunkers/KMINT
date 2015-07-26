@@ -257,6 +257,11 @@ void FWApplication::RenderGameObjects()
 	{
 		obj->Draw();
 	}
+
+	Character *cow = (Character *)mCow;
+	Character *bunny = (Character *)mTarget;
+	DrawText("Koe: " + cow->StateName(), 800 / 2, 600 / 2 + 50);
+	DrawText("Haas: " + bunny->StateName(), 800 / 2, 600 / 2 + 70);
 }
 
 void FWApplication::SetTargetFPS(unsigned short target)

@@ -12,7 +12,7 @@ private:
 public:
 	Waypoint(Node *node1, Node *node2, int distance);
 	~Waypoint();
-	int Distance();
+	double Distance();
 	void Update(float dt);
 	Node* OtherNode(Node *node);
 };

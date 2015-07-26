@@ -1,7 +1,7 @@
 #include "State.h"
 
-State::State()
-{
+State::State(string name){
+	mName = name;
 }
 
 
@@ -19,4 +19,8 @@ void State::Move(){
 
 void State::Update(){
 
+}
+
+string State::name(){
+	return mName;
 }

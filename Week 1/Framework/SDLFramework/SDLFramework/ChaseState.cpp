@@ -1,7 +1,7 @@
 #include "ChaseState.h"
 #include "AStar.h"
 
-ChaseState::ChaseState() : State(){
+ChaseState::ChaseState() : State("Op jacht"){
 	mMoveTarget = true;
 }
 

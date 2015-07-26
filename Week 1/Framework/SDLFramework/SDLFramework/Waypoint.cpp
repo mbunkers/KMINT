@@ -14,7 +14,7 @@ void Waypoint::Update(float dt){
 
 }
 
-int Waypoint::Distance(){
+double Waypoint::Distance(){
 	double x = mFirstNode->GetX() - mSecondNode->GetX();
 	double y = mFirstNode->GetX() - mSecondNode->GetX();
 
