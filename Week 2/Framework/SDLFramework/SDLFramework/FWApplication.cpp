@@ -248,16 +248,19 @@ void FWApplication::handleEvent(){
 		}
 		if (dynamic_cast<SearchState *>(cow->mCurrentState)){
 			if (cow->mCurrentLocation->mItem != nullptr){
-				
-				int size = mGameObjects.size();
-				int random = (0 + rand() % (int)size);
+				Node *newItemNode = nullptr;
+				while (newItemNode == nullptr){
+					int size = mGameObjects.size();
+					int random = (0 + rand() % (int)size);
 
-				Node *candidateNode = (Node *)mGameObjects.at(random);
-				if (candidateNode != cow->mCurrentLocation){
-					candidateNode->mItem = cow->mCurrentLocation->mItem;
-					cow->mCurrentLocation->mItem = nullptr;
-					candidateNode->mItem->setNewPosition(candidateNode->GetX(), candidateNode->GetY());
+					Node *candidateNode = (Node *)mGameObjects.at(random);
+					if (candidateNode != cow->mCurrentLocation){
+						newItemNode = candidateNode;
+					}
 				}
+				newItemNode->mItem = cow->mCurrentLocation->mItem;
+				cow->mCurrentLocation->mItem = nullptr;
+				newItemNode->mItem->mCurrentLocation = newItemNode;
 
 				cow->changeState();
 			}
@@ -305,6 +308,11 @@ void FWApplication::RenderGameObjects()
 	{
 		obj->Draw();
 	}
+
+	Character *cow = (Character *)mCow;
+	Character *bunny = (Character *)mBunny;
+	DrawText("Koe: " + cow->StateName(), 800 / 2, 600 / 2 + 50);
+	DrawText("Haas: " + bunny->StateName(), 800 / 2, 600 / 2 + 70);
 }
 
 void FWApplication::SetTargetFPS(unsigned short target)

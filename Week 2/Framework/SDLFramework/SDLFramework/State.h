@@ -3,10 +3,15 @@
 
 #include "Node.h"
 #include "Character.h"
+#include <string>
+
+using namespace std;
 
 class State{
+private:
+	string mName;
 public:
-	State();
+	State(string name);
 	~State();
 
 	class IGameObject *mTarget;
@@ -18,6 +23,7 @@ public:
 	virtual void Update();
 
 	void setTarget(Character *target);
+	string name();
 };
 
 #endif
