@@ -100,15 +100,34 @@ void FWApplication::setup(){
 	mCow = (IGameObject *)cow;
 	mBunny = (IGameObject *)bunny;
 
-	int size = mGameObjects.size();
-	int random = (0 + rand() % (int)size);
+	vector<string> items = vector<string>();
+	items.push_back("pill.png");
+	items.push_back("gun-metal.png");
 
-	Node *candidateNode = (Node *)mGameObjects.at(random);
-	candidateNode->mItem = new Item(LoadTexture("pill.png"));
-	candidateNode->mItem->setNewPosition(candidateNode->GetX(), candidateNode->GetY());
-	candidateNode->mItem->mCurrentLocation = candidateNode;
+	for (size_t i = 0; i < items.size(); i++){
+		Node *newNode = nullptr;
+		while (newNode == nullptr){
+			int size = mGameObjects.size();
+			int random = (0 + rand() % (int)size);
 
-	mItem = candidateNode->mItem;
+			Node *candidateNode = (Node *)mGameObjects.at(random);
+			if (candidateNode->mItem == nullptr){
+				newNode = candidateNode;
+			}
+		}
+
+		newNode->mItem = new Item(LoadTexture(items.at(i)));
+		newNode->mItem->setNewPosition(newNode->GetX(), newNode->GetY());
+		newNode->mItem->mCurrentLocation = newNode;
+
+		if (items.at(i) == "pill.png"){
+			mItem = newNode->mItem;
+		}
+		else {
+			newNode->mItem->mIsWeapon = true;
+			mWeapon = newNode->mItem;
+		}
+	}
 }
 
 //Node* FWApplication::createNode(int x, int y){
@@ -225,6 +244,12 @@ void FWApplication::handleEvent(){
 	bunny->move();
 	cow->move();
 
+	if (bunny->mCurrentLocation->mItem != nullptr){
+		if (bunny->mCurrentLocation->mItem->mIsWeapon){
+			bunny->changeState();
+		}
+	}
+
 	if (cow->mCurrentState->mMoveTarget){
 		if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
 			if (cow->mCurrentLocation->mCharacters.size() > 1){
@@ -244,25 +269,31 @@ void FWApplication::handleEvent(){
 				bunny->mCurrentLocation->removeCharacter(bunny);
 				bunny->mCurrentLocation = newBunnyNode;
 				cow->changeState();
+				bunny->changeState();
 			}
 		}
 		if (dynamic_cast<SearchState *>(cow->mCurrentState)){
 			if (cow->mCurrentLocation->mItem != nullptr){
-				Node *newItemNode = nullptr;
-				while (newItemNode == nullptr){
-					int size = mGameObjects.size();
-					int random = (0 + rand() % (int)size);
+				if (!cow->mCurrentLocation->mItem->mIsWeapon){
+					Node *newItemNode = nullptr;
+					while (newItemNode == nullptr){
+						int size = mGameObjects.size();
+						int random = (0 + rand() % (int)size);
 
-					Node *candidateNode = (Node *)mGameObjects.at(random);
-					if (candidateNode != cow->mCurrentLocation){
-						newItemNode = candidateNode;
+						Node *candidateNode = (Node *)mGameObjects.at(random);
+						if (candidateNode != cow->mCurrentLocation){
+							if (candidateNode->mItem == nullptr){
+								newItemNode = candidateNode;
+							}
+						}
 					}
-				}
-				newItemNode->mItem = cow->mCurrentLocation->mItem;
-				cow->mCurrentLocation->mItem = nullptr;
-				newItemNode->mItem->mCurrentLocation = newItemNode;
+					newItemNode->mItem = cow->mCurrentLocation->mItem;
+					cow->mCurrentLocation->mItem = nullptr;
+					newItemNode->mItem->mCurrentLocation = newItemNode;
+					newItemNode->mItem->setNewPosition(newItemNode->GetX(), newItemNode->GetY());
 
-				cow->changeState();
+					cow->changeState();
+				}
 			}
 		}
 	}

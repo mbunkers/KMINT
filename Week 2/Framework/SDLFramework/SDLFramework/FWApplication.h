@@ -277,6 +277,7 @@ private:
 	IGameObject *mCow;
 	IGameObject *mBunny;
 	IGameObject *mItem;
+	IGameObject *mWeapon;
 };
 
 #endif

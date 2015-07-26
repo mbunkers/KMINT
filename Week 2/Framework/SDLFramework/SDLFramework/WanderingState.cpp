@@ -1,5 +1,4 @@
 #include "WanderingState.h"
-#include "ChaseState.h"
 
 WanderingState::WanderingState(): State("Aan het wandelen"){
 }
@@ -19,14 +18,6 @@ void WanderingState::Move(){
 
 			waypoint = (Waypoint *)mOwner->mCurrentLocation->mNeighbours.at(random);
 			Node *newNode = waypoint->OtherNode(mOwner->mCurrentLocation);
-
-			if (newNode->hasCharacter()){
-				Character *character = newNode->mCharacters.at(0);
-
-				if (dynamic_cast<ChaseState *>(character->mCurrentState)){
-					waypoint = nullptr;
-				}
-			}
 		}
 
 		if (mOwner->mCurrentLocation != nullptr){

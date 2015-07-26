@@ -8,6 +8,7 @@ public:
 	~Item();
 
 	class Node *mCurrentLocation;
+	bool mIsWeapon = false;
 
 	void Draw();
 	void Update(float deltaTime);

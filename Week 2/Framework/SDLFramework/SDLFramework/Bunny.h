@@ -9,6 +9,7 @@ public:
 	Bunny(SDL_Texture *texture, Node *startNode);
 	~Bunny();
 	void move();
+	void changeState();
 };
 
 #endif

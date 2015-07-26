@@ -1,0 +1,84 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "KMINT",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Week 2",
+			"ownedElements": [
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAFOy9y8nm3YuRc=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Cow",
+					"visible": true,
+					"defaultDiagram": false
+				}
+			],
+			"visibility": "public"
+		},
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFOy9+NL23gQlg=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Week 3",
+			"ownedElements": [
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAFOy9/NFW3kZPc=",
+					"_parent": {
+						"$ref": "AAAAAAFOy9+NL23gQlg="
+					},
+					"name": "ClassDiagram1",
+					"visible": true,
+					"defaultDiagram": false
+				},
+				{
+					"_type": "UMLStateMachine",
+					"_id": "AAAAAAFOy9/tnG3nMCs=",
+					"_parent": {
+						"$ref": "AAAAAAFOy9+NL23gQlg="
+					},
+					"name": "StateMachine1",
+					"ownedElements": [
+						{
+							"_type": "UMLStatechartDiagram",
+							"_id": "AAAAAAFOy9/tnG3pzp8=",
+							"_parent": {
+								"$ref": "AAAAAAFOy9/tnG3nMCs="
+							},
+							"name": "StatechartDiagram1",
+							"tags": [
+								{
+									"_type": "Tag",
+									"_id": "AAAAAAFOy+ByG23whlw=",
+									"_parent": {
+										"$ref": "AAAAAAFOy9/tnG3pzp8="
+									},
+									"name": "Tag1",
+									"kind": "string",
+									"checked": false,
+									"number": 0
+								}
+							],
+							"visible": true,
+							"defaultDiagram": false
+						}
+					],
+					"visibility": "public",
+					"isReentrant": true
+				}
+			],
+			"visibility": "public"
+		}
+	]
+}
