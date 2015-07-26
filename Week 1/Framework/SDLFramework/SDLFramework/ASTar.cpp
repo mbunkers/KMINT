@@ -14,17 +14,11 @@ AStar::AStar(Node *startNode, Node *targetNode){
 			Waypoint *waypoint = (Waypoint *)currentNode->mNode->mNeighbours.at(i);
 
 			if (!isInOpenList(waypoint->OtherNode(currentNode->mNode)) && waypoint->OtherNode(currentNode->mNode) != startNode){
-				AStarNode *newNode = new AStarNode(waypoint->OtherNode(currentNode->mNode), currentNode->mDistance + (int)DistanceBetween(currentNode->mNode, waypoint->OtherNode(currentNode->mNode)), (int)DistanceBetween(waypoint->OtherNode(currentNode->mNode), targetNode));
+				AStarNode *newNode = new AStarNode(waypoint->OtherNode(currentNode->mNode), currentNode->mDistance + DistanceBetween(currentNode->mNode, waypoint->OtherNode(currentNode->mNode)), DistanceBetween(waypoint->OtherNode(currentNode->mNode), targetNode));
 				bool present = false;
 				for (size_t i = 0; i < mClosedList.size(); i++){
 					AStarNode *aStarNode = mClosedList.at(i);
 					if (aStarNode->mNode == waypoint->OtherNode(currentNode->mNode)){
-						
-						if (aStarNode->mDistance + aStarNode->mDistanceToTravel < currentNode->mDistance + currentNode->mDistanceToTravel){
-							//mOpenList.erase(mOpenList.begin() + i);
-							//mOpenList.push_back(newNode);
-						}
-
 						present = true;
 						break;
 					}

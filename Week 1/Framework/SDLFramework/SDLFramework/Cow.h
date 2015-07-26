@@ -11,6 +11,5 @@ public:
 
 	void move();
 	void changeTarget(Character *target);
-	AStar *mAStar;
 };
 
