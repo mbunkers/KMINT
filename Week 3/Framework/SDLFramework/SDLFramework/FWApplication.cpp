@@ -105,20 +105,27 @@ void FWApplication::setup(){
 	items.push_back("gun-metal.png");
 
 	for (size_t i = 0; i < items.size(); i++){
-		int size = mGameObjects.size();
-		int random = (0 + rand() % (int)size);
+		Node *newNode = nullptr;
+		while (newNode == nullptr){
+			int size = mGameObjects.size();
+			int random = (0 + rand() % (int)size);
 
-		Node *candidateNode = (Node *)mGameObjects.at(random);
-		candidateNode->mItem = new Item(LoadTexture(items.at(i)));
-		candidateNode->mItem->setNewPosition(candidateNode->GetX(), candidateNode->GetY());
-		candidateNode->mItem->mCurrentLocation = candidateNode;
+			Node *candidateNode = (Node *)mGameObjects.at(random);
+			if (candidateNode->mItem == nullptr){
+				newNode = candidateNode;
+			}
+		}
+
+		newNode->mItem = new Item(LoadTexture(items.at(i)));
+		newNode->mItem->setNewPosition(newNode->GetX(), newNode->GetY());
+		newNode->mItem->mCurrentLocation = newNode;
 
 		if (items.at(i) == "pill.png"){
-			mItem = candidateNode->mItem;
+			mItem = newNode->mItem;
 		}
 		else {
-			candidateNode->mItem->mIsWeapon = true;
-			mWeapon = candidateNode->mItem;
+			newNode->mItem->mIsWeapon = true;
+			mWeapon = newNode->mItem;
 		}
 	}
 }
@@ -237,8 +244,13 @@ void FWApplication::handleEvent(){
 	Cow *cow = (Cow *)mCow;
 	Bunny *bunny = (Bunny *)mBunny;
 
-	bunny->move();
-	cow->move();
+	if (mCowTurn){
+		cow->move();
+	}
+	else {
+		bunny->move();
+	}
+	mCowTurn = !mCowTurn;
 
 	if (cow->mCurrentState->mMoveTarget){
 		if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
@@ -255,6 +267,9 @@ void FWApplication::handleEvent(){
 					if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
 						characterToMove = cow;
 						otherCharacter = bunny;
+					}
+					else {
+						mCowTurn = false;
 					}
 					Node *newNode = nullptr;
 
@@ -366,6 +381,17 @@ void FWApplication::RenderGameObjects()
 	{
 		obj->Draw();
 	}
+
+	Character *cow = (Character *)mCow;
+	Character *bunny = (Character *)mBunny;
+	if(mCowTurn){
+		DrawText("Aan de beurt: Koe", 800 / 2, 600 / 2 + 50);
+	}
+	else {
+		DrawText("Aan de beurt: Haas", 800 / 2, 600 / 2 + 50);
+	}
+	DrawText("Koe: " + cow->StateName(), 800 / 2, 600 / 2 + 70);
+	DrawText("Haas: " + bunny->StateName(), 800 / 2, 600 / 2 + 90);
 }
 
 void FWApplication::SetTargetFPS(unsigned short target)

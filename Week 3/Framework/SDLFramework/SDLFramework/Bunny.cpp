@@ -68,7 +68,6 @@ void Bunny::changeState(){
 				SDL_SetTextureColorMod(texture, 200, 200, 200);
 			}
 		}
-		//move();
 	}
 	else if (dynamic_cast<FleeState *>(mCurrentState)){
 		mCurrentState = new WanderingState();

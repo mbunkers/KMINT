@@ -1,7 +1,7 @@
 #include "SleepState.h"
 
 
-SleepState::SleepState(){
+SleepState::SleepState() : State("Aan het slapen"){
 	mMoveTarget = false;
 }
 

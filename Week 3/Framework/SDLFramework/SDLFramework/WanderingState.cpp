@@ -1,7 +1,7 @@
 #include "WanderingState.h"
 #include "ChaseState.h"
 
-WanderingState::WanderingState(): State(){
+WanderingState::WanderingState(): State("Aan het wandelen"){
 }
 
 

@@ -40,3 +40,11 @@ void Character::sleep(){
 void Character::wakeup(){
 
 }
+
+string Character::StateName(){
+	if (mCurrentState == nullptr){
+		return "Onbekende staat";
+	}
+	return mCurrentState->name();
+}
+

@@ -279,6 +279,8 @@ private:
 	IGameObject *mBunny;
 	IGameObject *mItem;
 	IGameObject *mWeapon;
+
+	bool mCowTurn = true;
 };
 
 #endif

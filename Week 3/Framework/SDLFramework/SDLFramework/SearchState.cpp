@@ -2,7 +2,7 @@
 #include "AStar.h"
 #include "Item.h"
 
-SearchState::SearchState() : State(){
+SearchState::SearchState() : State("Aan het zoeken naar een item"){
 	mMoveTarget = true;
 }
 

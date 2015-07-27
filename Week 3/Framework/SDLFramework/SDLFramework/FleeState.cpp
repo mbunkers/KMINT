@@ -1,7 +1,7 @@
 #include "FleeState.h"
 
 
-FleeState::FleeState(){
+FleeState::FleeState(): State("Aan het vluchten"){
 	mMoveTarget = false;
 }
 

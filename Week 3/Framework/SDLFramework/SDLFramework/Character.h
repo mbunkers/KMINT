@@ -6,6 +6,9 @@
 #include "Node.h"
 #include "State.h"
 #include "Item.h"
+#include <string>
+
+using namespace std;
 
 class Character : IGameObject{
 public:
@@ -24,6 +27,7 @@ public:
 	virtual void sleep();
 	virtual void flee();
 	virtual void wakeup();
+	string StateName();
 };
 
 #endif
