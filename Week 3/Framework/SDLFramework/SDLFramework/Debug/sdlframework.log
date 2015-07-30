@@ -1,4 +1,4 @@
-﻿Build started 27/07/15 17:12:36.
+﻿Build started 30/07/15 23:08:42.
      1>Project "Z:\marcbunkers\Avans\KMINT\Week 3\Framework\SDLFramework\SDLFramework\SDLFramework.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"Z:\marcbunkers\Avans\KMINT\Week 3\Framework\SDLFramework\SDLFramework\../../SDL2-2.0.3/include" /I"Z:\marcbunkers\Avans\KMINT\Week 3\Framework\SDLFramework\SDLFramework\../../SDL2_ttf-2.0.12/include" /I"Z:\marcbunkers\Avans\KMINT\Week 3\Framework\SDLFramework\SDLFramework\../../SDL2_image-2.0.0/include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt FWApplication.cpp
@@ -25,4 +25,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.24
+Time Elapsed 00:00:05.40

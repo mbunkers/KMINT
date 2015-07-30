@@ -265,8 +265,8 @@ void FWApplication::handleEvent(){
 					Character *characterToMove = bunny;
 					Character *otherCharacter = cow;
 					if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
-						characterToMove = cow;
-						otherCharacter = bunny;
+						characterToMove = bunny;
+						otherCharacter = cow;
 					}
 					else {
 						mCowTurn = false;
