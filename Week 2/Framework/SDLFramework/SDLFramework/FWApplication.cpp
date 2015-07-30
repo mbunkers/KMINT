@@ -12,6 +12,7 @@
 #include "Cow.h"
 #include "Bunny.h"
 #include "Item.h"
+#include "WanderingState.h"
 
 FWApplication * FWApplication::mInstance;
 FWApplication::FWApplication(int offsetX, int offsetY, int width, int height)
@@ -240,16 +241,38 @@ void FWApplication::handleEvent(){
 	Cow *cow = (Cow *)mCow;
 	Bunny *bunny = (Bunny *)mBunny;
 	
+	if (mCowTurn){
+		cow->move();
+	}
+	else {
+		bunny->move();
+	}
+	mCowTurn = !mCowTurn;
 
-	bunny->move();
-	cow->move();
+	if (dynamic_cast<SearchState *>(cow->mCurrentState)){
+		if (cow->mCurrentLocation->mItem != nullptr){
+			if (!cow->mCurrentLocation->mItem->mIsWeapon){
+				Node *newItemNode = nullptr;
+				while (newItemNode == nullptr){
+					int size = mGameObjects.size();
+					int random = (0 + rand() % (int)size);
 
-	if (bunny->mCurrentLocation->mItem != nullptr){
-		if (bunny->mCurrentLocation->mItem->mIsWeapon){
-			bunny->changeState();
+					Node *candidateNode = (Node *)mGameObjects.at(random);
+					if (candidateNode != cow->mCurrentLocation){
+						if (candidateNode->mItem == nullptr){
+							newItemNode = candidateNode;
+						}
+					}
+				}
+				newItemNode->mItem = cow->mCurrentLocation->mItem;
+				cow->mCurrentLocation->mItem = nullptr;
+				newItemNode->mItem->mCurrentLocation = newItemNode;
+				newItemNode->mItem->setNewPosition(newItemNode->GetX(), newItemNode->GetY());
+
+				cow->changeState();
+			}
 		}
 	}
-
 	if (cow->mCurrentState->mMoveTarget){
 		if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
 			if (cow->mCurrentLocation->mCharacters.size() > 1){
@@ -272,27 +295,11 @@ void FWApplication::handleEvent(){
 				bunny->changeState();
 			}
 		}
-		if (dynamic_cast<SearchState *>(cow->mCurrentState)){
-			if (cow->mCurrentLocation->mItem != nullptr){
-				if (!cow->mCurrentLocation->mItem->mIsWeapon){
-					Node *newItemNode = nullptr;
-					while (newItemNode == nullptr){
-						int size = mGameObjects.size();
-						int random = (0 + rand() % (int)size);
 
-						Node *candidateNode = (Node *)mGameObjects.at(random);
-						if (candidateNode != cow->mCurrentLocation){
-							if (candidateNode->mItem == nullptr){
-								newItemNode = candidateNode;
-							}
-						}
-					}
-					newItemNode->mItem = cow->mCurrentLocation->mItem;
-					cow->mCurrentLocation->mItem = nullptr;
-					newItemNode->mItem->mCurrentLocation = newItemNode;
-					newItemNode->mItem->setNewPosition(newItemNode->GetX(), newItemNode->GetY());
-
-					cow->changeState();
+		if (bunny->mCurrentLocation->mItem != nullptr){
+			if (dynamic_cast<WanderingState *>(bunny->mCurrentState)){
+				if (bunny->mCurrentLocation->mItem->mIsWeapon){
+					bunny->changeState();
 				}
 			}
 		}
@@ -342,8 +349,14 @@ void FWApplication::RenderGameObjects()
 
 	Character *cow = (Character *)mCow;
 	Character *bunny = (Character *)mBunny;
-	DrawText("Koe: " + cow->StateName(), 800 / 2, 600 / 2 + 50);
-	DrawText("Haas: " + bunny->StateName(), 800 / 2, 600 / 2 + 70);
+	if (mCowTurn){
+		DrawText("Aan de beurt: Koe", 800 / 2, 600 / 2 + 50);
+	}
+	else {
+		DrawText("Aan de beurt: Haas", 800 / 2, 600 / 2 + 50);
+	}
+	DrawText("Koe: " + cow->StateName(), 800 / 2, 600 / 2 + 70);
+	DrawText("Haas: " + bunny->StateName(), 800 / 2, 600 / 2 + 90);
 }
 
 void FWApplication::SetTargetFPS(unsigned short target)

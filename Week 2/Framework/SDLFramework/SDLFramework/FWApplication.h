@@ -4,7 +4,6 @@
 #include <functional>
 #include <cstdint>
 #include <vector>
-//#include "Node.h"
 
 class IGameObject;
 struct SDL_Renderer;
@@ -253,6 +252,9 @@ public:
 	class IGameObject *getCow();
 	class IGameObject *getItem();
 
+	IGameObject* newNodeForCharacter(IGameObject *character);
+	IGameObject* newNodeForItem(IGameObject *item);
+
 private:
 	std::vector<IGameObject *> mGameObjects;
 	static FWApplication * mInstance;
@@ -278,6 +280,8 @@ private:
 	IGameObject *mBunny;
 	IGameObject *mItem;
 	IGameObject *mWeapon;
+
+	bool mCowTurn = true;
 };
 
 #endif
