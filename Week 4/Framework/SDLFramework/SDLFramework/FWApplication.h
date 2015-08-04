@@ -4,6 +4,7 @@
 #include <functional>
 #include <cstdint>
 #include <vector>
+#include <SDL.h>
 //#include "Node.h"
 
 class IGameObject;
@@ -247,7 +248,7 @@ public:
 	void Quit();
 	//void AddOnEvent(std::function<void(SDL_Event*)> func);
 	void setup();
-	void handleEvent();
+	void handleEvent(SDL_Keycode keycode);
 
 	class IGameObject *getBunny();
 	class IGameObject *getCow();

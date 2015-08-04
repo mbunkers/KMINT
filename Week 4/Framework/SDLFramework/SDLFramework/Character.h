@@ -33,6 +33,9 @@ public:
 	virtual void sleep();
 	virtual void flee();
 	virtual void wakeup();
+
+	void speedUp();
+	void speedDown();
 };
 
 #endif

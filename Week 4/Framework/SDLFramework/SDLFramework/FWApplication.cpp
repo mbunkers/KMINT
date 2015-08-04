@@ -1,7 +1,6 @@
 #include "FWApplication.h"
 #include "Config.h"
 #include "IGameObject.h"
-#include <SDL.h>
 #include <SDL_video.h>
 #include <SDL_render.h>
 #include <SDL_events.h>
@@ -196,11 +195,23 @@ IGameObject * FWApplication::getWeapon(){
 	return mWeapon;
 }
 
-void FWApplication::handleEvent(){
+void FWApplication::handleEvent(SDL_Keycode keycode){
 	Character *cow = (Character *)mCow;
 	Character *bunny = (Character *)mBunny;
-	cow->setNewPosition(400, 400);
-	bunny->setNewPosition(200,100);
+	switch (keycode){
+	case SDLK_ESCAPE:
+		cow->setNewPosition(400, 400);
+		bunny->setNewPosition(200, 100);
+		break;
+	case SDLK_PLUS:
+		bunny->speedUp();
+		break;
+	case SDLK_MINUS:
+		bunny->speedDown();
+		break;
+	default:
+		break;
+	}
 }
 
 void FWApplication::EndTick()

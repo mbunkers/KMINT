@@ -42,13 +42,7 @@ int main(int argc, char *args[]){
 				application->Quit();
 				break;
 			case SDL_KEYDOWN:
-				switch (event.key.keysym.sym){
-				case SDLK_SPACE:
-					application->handleEvent();
-					break;
-				default:
-					break;
-				}
+				application->handleEvent(event.key.keysym.sym);
 			}
 		}
 

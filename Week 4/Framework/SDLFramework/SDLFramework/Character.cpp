@@ -68,3 +68,10 @@ void Character::sleep(){
 void Character::wakeup(){
 
 }
+
+void Character::speedUp(){
+	mSpeed++;
+}
+void Character::speedDown(){
+	mSpeed--;
+}

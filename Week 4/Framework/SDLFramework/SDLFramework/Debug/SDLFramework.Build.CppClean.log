@@ -1,14 +1,13 @@
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\vc120.pdb
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\vc120.idb
-z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\item.obj
-z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\main.obj
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\bunny.obj
-z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\character.obj
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\cow.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\character.obj
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\steeringbehaviors.obj
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\astar.obj
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\astarnode.obj
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\chasestate.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\fwapplication.obj
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\fleestate.obj
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\movingentity.obj
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\node.obj
@@ -17,6 +16,7 @@ z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\slee
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\state.obj
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\wanderingstate.obj
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\waypoint.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\debug\sdlframework.ilk
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\debug\sdlframework.exe
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\debug\sdlframework.pdb
 z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\sdlframework.tlog\cl.command.1.tlog
