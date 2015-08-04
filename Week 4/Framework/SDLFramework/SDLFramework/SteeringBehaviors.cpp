@@ -138,7 +138,7 @@ SVector2D SteeringBehaviors::evade(Character *target){
 SVector2D SteeringBehaviors::wander(){
 	//first, add a small random vector to the target's position
 	mWanderTarget += SVector2D(RandomClamped() * mWanderJitter,
-	RandomClamped() * mWanderJitter);
+		RandomClamped() * mWanderJitter);
 
 	//reproject this new vector back on to a unit circle
 	mWanderTarget.Normalize();

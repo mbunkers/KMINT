@@ -15,10 +15,10 @@ Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mHeading = SVector2D(1, 0);
 	mSide = SVector2D(1, 0);
 
-	mSpeed = 30;
+	mSpeed = 100;
 	mMass = 1.0;
 	mMaxSpeed = 150;
-	mMaxForce = 400;
+	mMaxForce = 200;
 	mMaxTurnRate = 1;
 
 	mSteering = new SteeringBehaviors(this);

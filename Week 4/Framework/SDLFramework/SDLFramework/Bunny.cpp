@@ -17,7 +17,7 @@ Bunny::Bunny(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mHeading = SVector2D(1, 0);
 	mSide = SVector2D(1, 0);
 
-	mSpeed = 30;
+	mSpeed = 150;
 	mMass = 1;
 	mMaxSpeed = 300;
 	mMaxForce = 400;
