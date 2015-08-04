@@ -8,6 +8,10 @@ WanderingState::WanderingState(): State(){
 WanderingState::~WanderingState(){
 }
 
+void WanderingState::Update(){
+	mOwner->mSteering->wanderOn();
+}
+
 void WanderingState::Move(float deltaTime){
 	if (mOwner != nullptr){
 

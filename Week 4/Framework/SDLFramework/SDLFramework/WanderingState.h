@@ -7,6 +7,7 @@ public:
 	WanderingState();
 	~WanderingState();
 	void Move(float deltaTime);
+	void Update();
 };
 
 #endif

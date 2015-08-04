@@ -9,6 +9,10 @@ FleeState::FleeState(){
 FleeState::~FleeState(){
 }
 
+void FleeState::Update(){
+	mOwner->mSteering->evadeOn();
+}
+
 void FleeState::Move(float deltaTime){
 	Waypoint *waypoint = nullptr;
 	while (waypoint == nullptr){

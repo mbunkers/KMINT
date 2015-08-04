@@ -17,23 +17,39 @@ Bunny::Bunny(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mHeading = SVector2D(1, 0);
 	mSide = SVector2D(1, 0);
 
-	mSpeed = 150;
+	mSpeed = 100;
 	mMass = 1;
 	mMaxSpeed = 300;
 	mMaxForce = 400;
 	mMaxTurnRate = 1;
 
 	mSteering = new SteeringBehaviors(this);
-	mSteering->evadeOn();
+	mSteering->wanderOn();
 }
 
 
 Bunny::~Bunny(){
 }
 
-//void Bunny::Update(float deltaTime){
-//
-//}
+void Bunny::Update(float deltaTime){
+	Character::Update(deltaTime);
+	SVector2D evaderPosition = ((Character *)FWApplication::GetInstance()->getCow())->position();
+	double distance = evaderPosition.Distance(position());
+
+	if (distance > 300){
+		mSpeed = 100;
+		mCurrentState = new WanderingState();
+		mCurrentState->mOwner = this;
+		SDL_SetTextureColorMod(GetTexture(), 255, 0, 255);
+	}
+	else {
+		if (distance < 200){
+			mSpeed = 200;
+			flee();
+		}
+	}
+	mCurrentState->Update();
+}
 
 void Bunny::move(){
 	mCurrentState->Move(10);

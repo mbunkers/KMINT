@@ -198,7 +198,9 @@ IGameObject * FWApplication::getWeapon(){
 
 void FWApplication::handleEvent(){
 	Character *cow = (Character *)mCow;
+	Character *bunny = (Character *)mBunny;
 	cow->setNewPosition(400, 400);
+	bunny->setNewPosition(200,100);
 }
 
 void FWApplication::EndTick()

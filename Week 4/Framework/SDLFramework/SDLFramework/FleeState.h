@@ -9,6 +9,7 @@ public:
 	FleeState();
 	~FleeState();
 	void Move(float deltaTime);
+	void Update();
 };
 
 #endif

@@ -18,7 +18,7 @@ Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mSpeed = 100;
 	mMass = 1.0;
 	mMaxSpeed = 150;
-	mMaxForce = 200;
+	mMaxForce = 400;
 	mMaxTurnRate = 1;
 
 	mSteering = new SteeringBehaviors(this);
