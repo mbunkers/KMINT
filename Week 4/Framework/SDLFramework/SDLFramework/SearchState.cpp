@@ -10,7 +10,7 @@ SearchState::~SearchState(){
 }
 
 
-void SearchState::Move(){
+void SearchState::Move(float deltaTime){
 	Item *target = (Item *)mTarget;
 	AStar *aStar = new AStar(mOwner->mCurrentLocation, target->mCurrentLocation);
 	Node *newNode = aStar->getNextNode();

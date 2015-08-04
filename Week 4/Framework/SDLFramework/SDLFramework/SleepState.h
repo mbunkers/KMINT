@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __SleepState__
+#define __SleepState__
+
 #include "State.h"
 class SleepState :
 	public State
@@ -6,6 +8,7 @@ class SleepState :
 public:
 	SleepState();
 	~SleepState();
-	void Move();
+	void Move(float deltaTime);
 };
 
+#endif

@@ -12,14 +12,31 @@ Bunny::Bunny(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mCurrentState->mOwner = this;
 	SDL_SetTextureColorMod(texture, 255, 0, 255);
 	mStateChangeCounter = 5;
+
+	mVelocity = SVector2D(0, 0);
+	mHeading = SVector2D(1, 0);
+	mSide = SVector2D(1, 0);
+
+	mSpeed = 30;
+	mMass = 1;
+	mMaxSpeed = 300;
+	mMaxForce = 400;
+	mMaxTurnRate = 1;
+
+	mSteering = new SteeringBehaviors(this);
+	mSteering->evadeOn();
 }
 
 
 Bunny::~Bunny(){
 }
 
+//void Bunny::Update(float deltaTime){
+//
+//}
+
 void Bunny::move(){
-	mCurrentState->Move();
+	mCurrentState->Move(10);
 	mStateChangeCounter--;
 
 	if (dynamic_cast<SleepState *>(((Character *)FWApplication::GetInstance()->getCow())->mCurrentState)){
@@ -39,7 +56,6 @@ void Bunny::flee(){
 	SDL_SetTextureColorMod(texture, 0, 0, 0);
 	mItem = nullptr;
 	mStateChangeCounter = 5;
-	
 }
 
 void Bunny::changeState(){

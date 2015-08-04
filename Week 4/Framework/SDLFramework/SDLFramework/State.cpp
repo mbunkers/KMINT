@@ -13,7 +13,7 @@ void State::setTarget(Character *target){
 	mTarget = (IGameObject *)target;
 }
 
-void State::Move(){
+void State::Move(float deltaTime){
 
 }
 

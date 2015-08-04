@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __Item__
+#define __Item__
+
 #include "IGameObject.h"
 class Item :
 	public IGameObject
@@ -15,3 +17,4 @@ public:
 	void setNewPosition(int x, int y);
 };
 
+#endif

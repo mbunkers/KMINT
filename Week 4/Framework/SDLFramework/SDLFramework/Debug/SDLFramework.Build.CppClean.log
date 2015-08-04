@@ -1,39 +1,27 @@
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\vc120.pdb
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\vc120.idb
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\astar.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\astarnode.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\bunny.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\character.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\chasestate.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\cow.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\fwapplication.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\main.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\node.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\searchstate.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\state.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\wanderingstate.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\waypoint.obj
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\vc120.pdb
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\vc120.idb
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\astar.obj
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\astarnode.obj
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\chasestate.obj
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\fwapplication.obj
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\main.obj
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\node.obj
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\searchstate.obj
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\state.obj
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\wanderingstate.obj
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\waypoint.obj
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\debug\sdlframework.ilk
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\debug\sdlframework.exe
-z:\marcbunkers\avans\kmint\week 2\framework\sdlframework\debug\sdlframework.pdb
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\debug\sdlframework.pdb
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\debug\sdlframework.exe
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\debug\sdlframework.ilk
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\sdlframework.tlog\cl.command.1.tlog
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\sdlframework.tlog\cl.read.1.tlog
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\sdlframework.tlog\cl.write.1.tlog
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\sdlframework.tlog\link.command.1.tlog
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\sdlframework.tlog\link.read.1.tlog
-\\vmware-host\shared folders\marcbunkers\avans\kmint\week 2\framework\sdlframework\sdlframework\debug\sdlframework.tlog\link.write.1.tlog
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\vc120.pdb
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\vc120.idb
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\item.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\main.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\bunny.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\character.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\cow.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\steeringbehaviors.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\astar.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\astarnode.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\chasestate.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\fleestate.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\movingentity.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\node.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\searchstate.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\sleepstate.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\state.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\wanderingstate.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\waypoint.obj
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\debug\sdlframework.exe
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\debug\sdlframework.pdb
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\sdlframework.tlog\cl.command.1.tlog
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\sdlframework.tlog\cl.read.1.tlog
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\sdlframework.tlog\cl.write.1.tlog
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\sdlframework.tlog\link.command.1.tlog
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\sdlframework.tlog\link.read.1.tlog
+z:\marcbunkers\avans\kmint\week 4\framework\sdlframework\sdlframework\debug\sdlframework.tlog\link.write.1.tlog

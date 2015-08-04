@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __FleeState__
+#define __FleeState__
+
 #include "State.h"
 class FleeState :
 	public State
@@ -6,6 +8,7 @@ class FleeState :
 public:
 	FleeState();
 	~FleeState();
-	void Move();
+	void Move(float deltaTime);
 };
 
+#endif

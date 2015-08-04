@@ -8,7 +8,7 @@ WanderingState::WanderingState(): State(){
 WanderingState::~WanderingState(){
 }
 
-void WanderingState::Move(){
+void WanderingState::Move(float deltaTime){
 	if (mOwner != nullptr){
 
 		Node *enemyNode = nullptr;

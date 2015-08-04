@@ -14,7 +14,7 @@ public:
 	bool mFinished;
 	bool mMoveTarget = false;
 
-	virtual void Move();
+	virtual void Move(float deltaTime);
 	virtual void Update();
 
 	void setTarget(Character *target);

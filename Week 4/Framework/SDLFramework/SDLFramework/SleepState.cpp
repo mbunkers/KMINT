@@ -9,6 +9,6 @@ SleepState::SleepState(){
 SleepState::~SleepState(){
 }
 
-void SleepState::Move(){
+void SleepState::Move(float deltaTime){
 	// Doesn't move
 }

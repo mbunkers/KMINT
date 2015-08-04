@@ -18,7 +18,7 @@ public:
 	
 	Node *moveToNextLocation(Node *startNode, Node *targetNode);
 	void move();
-	void Update(float dt);
+	//void Update(float deltaTime);
 	void changeTarget(Character *target);
 	void changeTarget(Cow *target);
 	void reset(Node *startNode, Node *targetNode);

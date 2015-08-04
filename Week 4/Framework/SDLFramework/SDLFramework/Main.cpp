@@ -56,7 +56,7 @@ int main(int argc, char *args[]){
 		application->RenderGameObjects();
 		
 		application->SetColor(Color(0, 0, 0, 255));
-		application->DrawText("Welcome to KMint", 800 / 2, 600 / 2);
+		//application->DrawText("Welcome to KMint", 800 / 2, 600 / 2);
 	
 		// For the background
 		application->SetColor(Color(255, 255, 255, 255));

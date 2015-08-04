@@ -10,14 +10,32 @@ Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mCurrentState->mTarget = FWApplication::GetInstance()->getBunny();
 	SDL_SetTextureColorMod(texture, 0, 255, 0);
 	mCurrentState->mOwner = this;
+
+	mVelocity = SVector2D(0, 0);
+	mHeading = SVector2D(1, 0);
+	mSide = SVector2D(1, 0);
+
+	mSpeed = 30;
+	mMass = 1.0;
+	mMaxSpeed = 150;
+	mMaxForce = 400;
+	mMaxTurnRate = 1;
+
+	mSteering = new SteeringBehaviors(this);
+	mSteering->setTarget((Character *)FWApplication::GetInstance()->getBunny());
+	mSteering->persuitOn();
 }
 
 
 Cow::~Cow(){
 }
 
+//void Cow::Update(float deltaTime){
+//	move();
+//}
+
 void Cow::move(){
-	mCurrentState->Move();
+	mCurrentState->Move(10);
 }
 
 void Cow::wakeup(){
@@ -58,9 +76,6 @@ void Cow::changeState(){
 	//}
 
 	mCurrentState->mOwner = this;
-}
-
-void Cow::Update(float dt){
 }
 
 void Cow::changeTarget(Character *target){

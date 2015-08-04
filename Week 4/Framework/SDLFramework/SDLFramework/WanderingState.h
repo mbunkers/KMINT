@@ -6,7 +6,7 @@ class WanderingState : public State{
 public:
 	WanderingState();
 	~WanderingState();
-	void Move();
+	void Move(float deltaTime);
 };
 
 #endif

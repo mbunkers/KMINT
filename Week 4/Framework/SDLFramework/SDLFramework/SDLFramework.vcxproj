@@ -94,10 +94,12 @@
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MovingEntity.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="SearchState.cpp" />
     <ClCompile Include="SleepState.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="SteeringBehaviors.cpp" />
     <ClCompile Include="WanderingState.cpp" />
     <ClCompile Include="Waypoint.cpp" />
   </ItemGroup>
@@ -108,6 +110,7 @@
     <ClInclude Include="AStar.h" />
     <ClInclude Include="AStarNode.h" />
     <ClInclude Include="Bunny.h" />
+    <ClInclude Include="C2DMatrix.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="ChaseState.h" />
     <ClInclude Include="Config.h" />
@@ -116,11 +119,15 @@
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="SearchState.h" />
     <ClInclude Include="SleepState.h" />
     <ClInclude Include="State.h" />
-    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="SteeringBehaviors.h" />
+    <ClInclude Include="SVector2D.h" />
+    <ClInclude Include="Transformations.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="WanderingState.h" />
     <ClInclude Include="Waypoint.h" />
   </ItemGroup>

@@ -15,6 +15,7 @@ public:
 	void move();
 	void changeState();
 	void flee();
+	//void Update(float deltaTime);
 };
 
 #endif

@@ -8,7 +8,7 @@ public:
 	SearchState();
 	~SearchState();
 
-	void Move();
+	void Move(float deltaTime);
 };
 
 #endif

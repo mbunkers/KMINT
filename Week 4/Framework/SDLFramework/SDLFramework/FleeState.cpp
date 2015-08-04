@@ -9,7 +9,7 @@ FleeState::FleeState(){
 FleeState::~FleeState(){
 }
 
-void FleeState::Move(){
+void FleeState::Move(float deltaTime){
 	Waypoint *waypoint = nullptr;
 	while (waypoint == nullptr){
 		int size = mOwner->mCurrentLocation->mNeighbours.size();

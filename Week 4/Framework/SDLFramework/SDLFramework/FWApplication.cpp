@@ -72,55 +72,18 @@ FWApplication::FWApplication(int offsetX, int offsetY, int width, int height)
 }
 
 void FWApplication::setup(){
-	Node *node1 = new Node(200, 50, 50, 50, LoadTexture("node.png"));
-	Node *node2 = new Node(150, 150, 50, 50, LoadTexture("node.png"));
-	Node *node3 = new Node(500, 130, 50, 50, LoadTexture("node.png"));
-	Node *node4 = new Node(430, 65, 50, 50, LoadTexture("node.png"));
-	Node *node5 = new Node(400, 204, 50, 50, LoadTexture("node.png"));
+	Cow *cow = new Cow(LoadTexture("cow-1.png"), nullptr);
+	Bunny *bunny = new Bunny(LoadTexture("rabbit-2.png"), nullptr);
+	cow->setNewPosition(100, 1500);
+	bunny->setNewPosition(400, 300);
+	cow->mSteering->setTarget(bunny);
+	bunny->mSteering->setTarget(cow);
 
-	node1->addNeighbour(node2, 1);
-	node2->addNeighbour(node5, 6);
-	node5->addNeighbour(node3, 4);
-	node1->addNeighbour(node4, 2);
-	node4->addNeighbour(node3, 2);
-	node1->addNeighbour(node5, 8);
+	AddRenderable((IGameObject *)cow);
+	AddRenderable((IGameObject *)bunny);
 
-	AddRenderable((IGameObject *)node1);
-	AddRenderable((IGameObject *)node2);
-	AddRenderable((IGameObject *)node3);
-	AddRenderable((IGameObject *)node4);
-	AddRenderable((IGameObject *)node5);
-
-	Cow *cow = new Cow(LoadTexture("cow-1.png"), node2);
-	Bunny *bunny = new Bunny(LoadTexture("rabbit-2.png"), node3);
-	cow->changeTarget(bunny);
-
-	node2->setCharacter(cow);
-	node3->setCharacter(bunny);
-	mCow = (IGameObject *)cow;
-	mBunny = (IGameObject *)bunny;
-
-	vector<string> items = vector<string>();
-	items.push_back("pill.png");
-	items.push_back("gun-metal.png");
-
-	for (size_t i = 0; i < items.size(); i++){
-		int size = mGameObjects.size();
-		int random = (0 + rand() % (int)size);
-
-		Node *candidateNode = (Node *)mGameObjects.at(random);
-		candidateNode->mItem = new Item(LoadTexture(items.at(i)));
-		candidateNode->mItem->setNewPosition(candidateNode->GetX(), candidateNode->GetY());
-		candidateNode->mItem->mCurrentLocation = candidateNode;
-
-		if (items.at(i) == "pill.png"){
-			mItem = candidateNode->mItem;
-		}
-		else {
-			candidateNode->mItem->mIsWeapon = true;
-			mWeapon = candidateNode->mItem;
-		}
-	}
+	mCow = cow;
+	mBunny = bunny;
 }
 
 //Node* FWApplication::createNode(int x, int y){
@@ -234,96 +197,8 @@ IGameObject * FWApplication::getWeapon(){
 }
 
 void FWApplication::handleEvent(){
-	Cow *cow = (Cow *)mCow;
-	Bunny *bunny = (Bunny *)mBunny;
-
-	bunny->move();
-	cow->move();
-
-	if (cow->mCurrentState->mMoveTarget){
-		if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
-			if (cow->mCurrentLocation->mCharacters.size() > 1){
-				if (bunny->mItem != nullptr && bunny->mItem->mIsWeapon){
-					
-					cow->sleep();
-					bunny->flee();
-				}
-				else {
-					// Check state of bunny
-					Character *characterToMove = bunny;
-					Character *otherCharacter = cow;
-					if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
-						characterToMove = cow;
-						otherCharacter = bunny;
-					}
-					Node *newNode = nullptr;
-
-					while (newNode == nullptr){
-						int size = mGameObjects.size();
-						int random = (0 + rand() % (int)size);
-
-						Node *candidateNode = (Node *)mGameObjects.at(random);
-						if (!candidateNode->hasCharacter()){
-							newNode = candidateNode;
-						}
-					}
-
-					newNode->setCharacter(characterToMove);
-					characterToMove->mCurrentLocation->removeCharacter(characterToMove);
-					characterToMove->mCurrentLocation = newNode;
-					characterToMove->changeState();
-					otherCharacter->changeState();
-				}
-			}
-			else if (dynamic_cast<ChaseState *>(bunny->mCurrentState)){
-				if (bunny->mItem != nullptr){
-					if (bunny->mItem->mIsWeapon){
-						for (size_t i = 0; i < bunny->mCurrentLocation->mNeighbours.size(); i++){
-							Waypoint *waypoint = (Waypoint *)bunny->mCurrentLocation->mNeighbours.at(i);
-							Node *node = waypoint->OtherNode(bunny->mCurrentLocation);
-							if (node->hasCharacter()){
-
-								Node *newNode = nullptr;
-
-								while (newNode == nullptr){
-									int size = mGameObjects.size();
-									int random = (0 + rand() % (int)size);
-
-									Node *candidateNode = (Node *)mGameObjects.at(random);
-									if (!candidateNode->hasCharacter()){
-										newNode = candidateNode;
-									}
-								}
-
-								newNode->setCharacter(cow);
-								cow->mCurrentLocation->removeCharacter(cow);
-								cow->mCurrentLocation = newNode;
-								cow->changeState();
-								bunny->changeState();
-								break;
-							}
-						}
-					}
-				}
-			}
-		}
-		if (dynamic_cast<SearchState *>(cow->mCurrentState)){
-			if (cow->mCurrentLocation->mItem != nullptr){
-				
-				int size = mGameObjects.size();
-				int random = (0 + rand() % (int)size);
-
-				Node *candidateNode = (Node *)mGameObjects.at(random);
-				if (candidateNode != cow->mCurrentLocation){
-					candidateNode->mItem = cow->mCurrentLocation->mItem;
-					cow->mCurrentLocation->mItem = nullptr;
-					candidateNode->mItem->setNewPosition(candidateNode->GetX(), candidateNode->GetY());
-				}
-
-				cow->changeState();
-			}
-		}
-	}
+	Character *cow = (Character *)mCow;
+	cow->setNewPosition(400, 400);
 }
 
 void FWApplication::EndTick()
@@ -498,7 +373,7 @@ uint32_t FWApplication::GetTimeSinceStartedMS() const
 {
 	return mTimeMS;
 }
-
+/*
 void FWApplication::DrawText(const std::string & message, uint32_t offsetX, uint32_t offsetY)
 {
 	SDL_Color color = { mColor.r, mColor.g, mColor.b, mColor.a };
@@ -516,7 +391,7 @@ void FWApplication::DrawText(const std::string & message, uint32_t offsetX, uint
 		SDL_DestroyTexture(texture);
 	}
 }
-
+*/
 void FWApplication::SetFontSize(int ptSize)
 {
 	mFontSize = ptSize;

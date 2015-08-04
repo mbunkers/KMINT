@@ -8,7 +8,7 @@ public:
 	ChaseState();
 	~ChaseState();
 
-	void Move();
+	void Move(float deltaTime);
 };
 
 #endif
