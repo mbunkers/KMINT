@@ -122,7 +122,7 @@ SVector2D SteeringBehaviors::evade(Character *target){
 	//within a 'threat range'
 	const double ThreatRange = 100.0;
 	if (ToPursuer.LengthSq() > ThreatRange * ThreatRange){
-		return SVector2D();
+		//return SVector2D();
 	}
 
 	//the lookahead time is propotional to the distance between the pursuer
