@@ -114,24 +114,11 @@ SVector2D SteeringBehaviors::persuit(Character *target){
 }
 
 SVector2D SteeringBehaviors::evade(Character *target){
-	/* Not necessary to include the check for facing direction this time */
-
 	SVector2D ToPursuer = target->position() - mCharacter->position();
 
-	//uncomment the following two lines to have Evade only consider pursuers 
-	//within a 'threat range'
-	const double ThreatRange = 100.0;
-	if (ToPursuer.LengthSq() > ThreatRange * ThreatRange){
-		//return SVector2D();
-	}
-
-	//the lookahead time is propotional to the distance between the pursuer
-	//and the pursuer; and is inversely proportional to the sum of the
-	//agents' velocities
 	double LookAheadTime = ToPursuer.Length() /
 		(mCharacter->maxSpeed() + target->speed());
 
-	//now flee away from predicted future position of the pursuer
 	return flee(target->position() + target->velocity() * LookAheadTime);
 }
 

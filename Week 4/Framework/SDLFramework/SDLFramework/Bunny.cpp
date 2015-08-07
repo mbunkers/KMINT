@@ -19,7 +19,7 @@ Bunny::Bunny(SDL_Texture *texture, Node *startNode) : Character(texture){
 
 	mSpeed = 100;
 	mMass = 1;
-	mMaxSpeed = 300;
+	mMaxSpeed = 150;
 	mMaxForce = 400;
 	mMaxTurnRate = 1;
 
@@ -33,18 +33,25 @@ Bunny::~Bunny(){
 
 void Bunny::Update(float deltaTime){
 	Character::Update(deltaTime);
-	SVector2D evaderPosition = ((Character *)FWApplication::GetInstance()->getCow())->position();
-	double distance = evaderPosition.Distance(position());
 
-	if (distance > 300){
+	SVector2D toPursuer = ((Character *)FWApplication::GetInstance()->getCow())->position() - position();
+
+	const double threatRange = 200;
+	const double safeRange = threatRange * 2;
+
+	//printf("%f\n", toPursuer.LengthSq());
+
+	if (toPursuer.LengthSq() > safeRange * safeRange){
+		mMaxSpeed = 150;
 		mSpeed = 100;
 		mCurrentState = new WanderingState();
 		mCurrentState->mOwner = this;
 		SDL_SetTextureColorMod(GetTexture(), 255, 0, 255);
 	}
 	else {
-		if (distance < 200){
-			mSpeed = 200;
+		if (toPursuer.LengthSq() < threatRange * threatRange){
+			mSpeed = 150;
+			mMaxSpeed = 250;
 			flee();
 		}
 	}
