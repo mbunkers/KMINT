@@ -20,8 +20,6 @@ public:
 	void changeTarget(Character *target);
 	void changeTarget(Cow *target);
 	void changeState();
-	void sleep();
-	void wakeup();
 };
 
 #endif

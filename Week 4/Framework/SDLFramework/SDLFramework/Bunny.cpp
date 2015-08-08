@@ -8,9 +8,7 @@
 
 Bunny::Bunny(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mCurrentLocation = startNode;
-	mCurrentState = new WanderingState();
-	mCurrentState->mOwner = this;
-	SDL_SetTextureColorMod(texture, 255, 0, 255);
+	wander();
 	mStateChangeCounter = 5;
 
 	mVelocity = SVector2D(0, 0);

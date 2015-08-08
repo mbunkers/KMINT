@@ -7,7 +7,6 @@
 Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mCurrentLocation = startNode;
 	chase((Character *)FWApplication::GetInstance()->getBunny());
-	mCurrentState = new ChaseState();
 
 	mVelocity = SVector2D(0, 0);
 	mHeading = SVector2D(1, 0);
