@@ -1,8 +1,12 @@
-﻿Build started 8-8-2015 16:26:45.
+﻿Build started 8-8-2015 18:02:46.
      1>Project "C:\Users\Marcel\Desktop\KMINT\Week 4\Framework\SDLFramework\SDLFramework\SDLFramework.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Marcel\Desktop\KMINT\Week 4\Framework\SDLFramework\SDLFramework\../../SDL2-2.0.3/include" /I"C:\Users\Marcel\Desktop\KMINT\Week 4\Framework\SDLFramework\SDLFramework\../../SDL2_ttf-2.0.12/include" /I"C:\Users\Marcel\Desktop\KMINT\Week 4\Framework\SDLFramework\SDLFramework\../../SDL2_image-2.0.0/include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ASTar.cpp AStarNode.cpp Bunny.cpp Character.cpp ChaseState.cpp Cow.cpp FWApplication.cpp FleeState.cpp Node.cpp SearchState.cpp SleepState.cpp State.cpp SteeringBehaviors.cpp WanderingState.cpp Waypoint.cpp
-         Character.cpp
+         Cow.cpp
+         Bunny.cpp
+         Generating Code...
+         Compiling...
+         FWApplication.cpp
          Generating Code...
          Skipping... (no relevant changes detected)
          Waypoint.cpp
@@ -13,10 +17,8 @@
          SearchState.cpp
          Node.cpp
          FleeState.cpp
-         FWApplication.cpp
-         Cow.cpp
          ChaseState.cpp
-         Bunny.cpp
+         Character.cpp
          AStarNode.cpp
          ASTar.cpp
        Link:
@@ -38,10 +40,9 @@
          Debug\SteeringBehaviors.obj
          Debug\WanderingState.obj
          Debug\Waypoint.obj
-     1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
          SDLFramework.vcxproj -> C:\Users\Marcel\Desktop\KMINT\Week 4\Framework\SDLFramework\Debug\SDLFramework.exe
      1>Done Building Project "C:\Users\Marcel\Desktop\KMINT\Week 4\Framework\SDLFramework\SDLFramework\SDLFramework.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.15
+Time Elapsed 00:00:05.46

@@ -32,24 +32,40 @@ Bunny::~Bunny(){
 void Bunny::Update(float deltaTime){
 	Character::Update(deltaTime);
 
-	SVector2D toPursuer = ((Character *)FWApplication::GetInstance()->getCow())->position() - position();
+	SVector2D toPursuer = mSteering->target()->position() - position();
 
-	const double threatRange = 200;
-	const double safeRange = threatRange * 2;
-
-	if (toPursuer.LengthSq() > safeRange * safeRange){
-		mMaxSpeed = 150;
-		mSpeed = 100;
-		wander();
-	}
-	else {
-		if (toPursuer.LengthSq() < threatRange * threatRange){
+	if (dynamic_cast<WanderingState *>(mCurrentState)){
+		if (hasThreat(toPursuer)){
 			mSpeed = 150;
 			mMaxSpeed = 250;
 			flee();
+			mCurrentState->Update();
 		}
+
+		return;
 	}
-	mCurrentState->Update();
+
+	if (dynamic_cast<FleeState *>(mCurrentState)){
+		if (isSafe(toPursuer)){
+			mMaxSpeed = 150;
+			mSpeed = 100;
+			wander();
+		}
+		mCurrentState->Update();
+		return;
+	}
+}
+
+double Bunny::distanceToPersuer(SVector2D distanceVector){
+	return distanceVector.LengthSq();
+}
+
+bool Bunny::isSafe(SVector2D distance){
+	return distanceToPersuer(distance) > pow(mSafeRange, 2);
+}
+
+bool Bunny::hasThreat(SVector2D distance){
+	return distanceToPersuer(distance) < pow(mThreatRange, 2);
 }
 
 void Bunny::move(){
