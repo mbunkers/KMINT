@@ -15,18 +15,10 @@ public:
 	Cow(SDL_Texture *texture, Node *startNode);
 	~Cow();
 
-	
-	Node *moveToNextLocation(Node *startNode, Node *targetNode);
 	void move();
-	//void Update(float deltaTime);
 	void changeTarget(Character *target);
 	void changeTarget(Cow *target);
-	void reset(Node *startNode, Node *targetNode);
 	void changeState();
-	void sleep();
-	void wakeup();
-
-	AStar *mAStar;
 };
 
 #endif

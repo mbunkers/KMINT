@@ -30,9 +30,13 @@ public:
 	void setPosition(SVector2D position);
 	SDL_Texture *getTexture();
 	virtual void changeState();
-	virtual void sleep();
-	virtual void flee();
-	virtual void wakeup();
+	void sleep();
+	void wander();
+	void flee();
+	void wakeup();
+	void wakeup(Character *target);
+	void search(class Item *item, int r, int g, int b);
+	void chase(Character *target);
 
 	void speedUp();
 	void speedDown();
