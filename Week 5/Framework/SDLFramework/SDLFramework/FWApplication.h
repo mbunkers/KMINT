@@ -228,6 +228,7 @@ public:
 	/// <param name="renderable">	[in,out] If non-null, the renderable. </param>
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	void AddRenderable(IGameObject * renderable);
+	void RemoveRenderable(IGameObject * renderable);
 
 	uint32_t GetTimeSinceStartedMS() const;
 
