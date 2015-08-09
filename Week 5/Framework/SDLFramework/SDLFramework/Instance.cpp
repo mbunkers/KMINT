@@ -5,10 +5,12 @@
 
 Instance::Instance(int ID){
 
+	mID = ID;
+
 	mCow = new Cow(FWApplication::GetInstance()->LoadTexture("cow-1.png"), nullptr);
 	mBunny = new Bunny(FWApplication::GetInstance()->LoadTexture("rabbit-2.png"), nullptr);
-	mWeapon = new Item(FWApplication::GetInstance()->LoadTexture("rabbit-2.png"));
-	mPill = new Item(FWApplication::GetInstance()->LoadTexture("rabbit-2.png"));
+	mWeapon = new Item(FWApplication::GetInstance()->LoadTexture("gun - metal.png"));
+	mPill = new Item(FWApplication::GetInstance()->LoadTexture("pill.png"));
 
 	mWeapon->mIsWeapon = true;
 	mBunny->chase(mCow);
@@ -21,20 +23,50 @@ Instance::Instance(int ID){
 	mPill->mID = ID;
 	mWeapon->mID = ID;
 
-	mCow->mInstance = this;
-	mBunny->mInstance = this;
-	mPill->mInstance = this;
-	mWeapon->mInstance = this;
-
 	mCow->setNewPosition(100, 150);
 	mBunny->setNewPosition(400, 300);
 
+	defineColor();
 	addToWorld();
 }
 
 
 Instance::~Instance(){
 
+}
+
+void Instance::defineColor(){
+	vector<IGameObject *> objects = vector<IGameObject *>();
+	objects.push_back(mBunny);
+	objects.push_back(mCow);
+	objects.push_back(mPill);
+	objects.push_back(mWeapon);
+
+	for (size_t i = 0; i < objects.size(); i++){
+		SDL_Texture *texture = objects.at(i)->GetTexture();
+
+		switch (mID){
+		case 0:
+			SDL_SetTextureColorMod(texture, 0, 0, 0);
+			break;
+		case 1:
+			SDL_SetTextureColorMod(texture, 255, 0, 0);
+			break;
+		case 2:
+			SDL_SetTextureColorMod(texture, 0, 255, 0);
+			break;
+		case 3: 
+			SDL_SetTextureColorMod(texture, 0, 0, 255);
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void Instance::setDefaultStates(){
+	mCow->defaultState();
+	mBunny->defaultState();
 }
 
 // Random for first run

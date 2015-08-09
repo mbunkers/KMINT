@@ -15,6 +15,9 @@ public:
 	Cow(SDL_Texture *texture, Node *startNode);
 	~Cow();
 
+	void Update(float deltaTime);
+	void respawn();
+	void defaultState();
 	void move();
 	void changeTarget(Character *target);
 	void changeTarget(Cow *target);

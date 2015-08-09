@@ -23,6 +23,9 @@ public:
 	class Node *mCurrentLocation;
 	class Item *mItem = nullptr;
 
+	void defaultState();
+	void respawn();
+
 	void Draw();
 	void Update(float deltaTime);
 	SVector2D position();

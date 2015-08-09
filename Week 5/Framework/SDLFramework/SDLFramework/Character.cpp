@@ -62,23 +62,27 @@ void Character::changeState(){
 
 }
 
+void Character::defaultState(){
+	wander();
+}
+
+void Character::respawn(){
+
+}
+
 void Character::wakeup(){
 	wander();
 }
 
 void Character::flee(){
-	SDL_Texture *texture = getTexture();
 	mCurrentState = new FleeState();
 	mCurrentState->mOwner = this;
-	SDL_SetTextureColorMod(texture, 0, 0, 0);
 	mItem = nullptr;
 }
 
 void Character::sleep(){
-	SDL_Texture *texture = getTexture();
 	mCurrentState = new SleepState();
 	mCurrentState->mOwner = this;
-	SDL_SetTextureColorMod(texture, 100, 100, 100);
 }
 
 void Character::wakeup(Character *target){
@@ -86,27 +90,23 @@ void Character::wakeup(Character *target){
 }
 
 void Character::search(class Item *item, int r, int g, int b){
-	SDL_Texture *texture = getTexture();
 	mCurrentState = new SearchState();
 	mCurrentState->mOwner = this;
 	mItem = item;
 	mCurrentState->mTarget = mItem;
-	SDL_SetTextureColorMod(texture, r, g, b);
 }
 
 void Character::chase(Character *target){
-	SDL_Texture *texture = getTexture();
 	mCurrentState = new ChaseState();
 	mCurrentState->mOwner = this;
-	mCurrentState->mTarget = target;
-	SDL_SetTextureColorMod(texture, 0, 255, 0);
+	if (target != nullptr){
+		mCurrentState->mTarget = target;
+	}
 }
 
 void Character::wander(){
-	SDL_Texture *texture = getTexture();
 	mCurrentState = new WanderingState();
 	mCurrentState->mOwner = this;
-	SDL_SetTextureColorMod(texture, 255, 0, 255);
 	mItem = nullptr;
 }
 

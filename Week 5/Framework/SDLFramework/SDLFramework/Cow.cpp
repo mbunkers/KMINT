@@ -3,14 +3,10 @@
 #include "SleepState.h"
 #include "FWApplication.h"
 #include "SDL_render.h"
+#include "Instance.h"
 
 Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mCurrentLocation = startNode;
-	chase(mInstance->mBunny);
-
-	mVelocity = SVector2D(0, 0);
-	mHeading = SVector2D(1, 0);
-	mSide = SVector2D(1, 0);
 
 	mSpeed = 100;
 	mMass = 1.0;
@@ -19,12 +15,30 @@ Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mMaxTurnRate = 1;
 
 	mSteering = new SteeringBehaviors(this);
-	mSteering->setTarget(mInstance->mBunny);
-	mSteering->persuitOn();
+	respawn();
 }
 
 
 Cow::~Cow(){
+}
+
+void Cow::Update(float deltaTime){
+	Character::Update(deltaTime);
+
+	SVector2D toPursuer = mSteering->target()->position() - position();
+}
+
+void Cow::defaultState(){
+	mSteering->wanderOn();
+	wander();
+}
+
+void Cow::respawn(){
+	mVelocity = SVector2D(0, 0);
+	mHeading = SVector2D(1, 0);
+	mSide = SVector2D(1, 0);
+	setPosition(FWApplication::GetInstance()->bunnySpawnPoint());
+	defaultState();
 }
 
 void Cow::move(){

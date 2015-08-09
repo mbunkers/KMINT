@@ -6,6 +6,7 @@
 #include <vector>
 #include <SDL.h>
 //#include "Node.h"
+#include "SVector2D.h"
 
 class IGameObject;
 struct SDL_Renderer;
@@ -258,8 +259,14 @@ public:
 	class IGameObject *getItem();
 	class IGameObject *getWeapon();
 
-	vector<class Instance *> mCurrentGeneration;
-	vector<vector< class Instance *>> previousGenerations;
+	class Instance* instance(int ID);
+
+	SVector2D bunnySpawnPoint(){
+		return SVector2D(200, 150);
+	}
+	SVector2D cowSpawnPoint(){
+		return SVector2D(600, 650);
+	}
 
 private:
 	std::vector<IGameObject *> mGameObjects;
@@ -286,6 +293,9 @@ private:
 	IGameObject *mBunny;
 	IGameObject *mItem;
 	IGameObject *mWeapon;
+
+	vector<class Instance *> mCurrentGeneration;
+	vector<vector< class Instance *>> previousGenerations;
 };
 
 #endif

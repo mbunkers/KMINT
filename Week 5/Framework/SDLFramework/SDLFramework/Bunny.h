@@ -20,10 +20,10 @@ private:
 public:
 	Bunny(SDL_Texture *texture, Node *startNode);
 	~Bunny();
-	void move();
-	void changeState();
+
+	void defaultState();
+	void respawn();
 	void flee();
-	void Update(float deltaTime);
 	double distanceToPersuer(SVector2D distanceVector);
 };
 

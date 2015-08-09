@@ -9,6 +9,8 @@
 using namespace std;
 
 class Instance{
+private:
+	void defineColor();
 public:
 	Instance(int ID);
 	~Instance();
@@ -24,6 +26,7 @@ public:
 	void addToWorld();
 	void removeFromWorld();
 
+	void setDefaultStates();
 	void setCowStateChance();
 	void setCowStateChance(int flee, int fleeAndSearchPill, int hide, int fleeAndSearchWeapon);
 	

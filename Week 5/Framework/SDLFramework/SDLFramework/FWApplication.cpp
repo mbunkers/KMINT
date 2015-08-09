@@ -75,8 +75,13 @@ void FWApplication::setup(){
 	mCurrentGeneration = vector<Instance *>();
 	previousGenerations = vector<vector<Instance *>>();
 
-	for (int i = 0; i < 4; i++){
-		mCurrentGeneration.push_back(new Instance(i));
+	// 4 should it be later on
+	int numberOfInstances = 1;
+
+	for (int i = 0; i < numberOfInstances; i++){
+		Instance *newInstance = new Instance(i);
+		mCurrentGeneration.push_back(newInstance);
+		newInstance->setDefaultStates();
 	}
 }
 
@@ -195,14 +200,14 @@ void FWApplication::handleEvent(SDL_Keycode keycode){
 	Character *bunny = (Character *)mBunny;
 	switch (keycode){
 	case SDLK_ESCAPE:
-		cow->setNewPosition(400, 400);
-		bunny->setNewPosition(200, 100);
+		//cow->setNewPosition(400, 400);
+		//bunny->setNewPosition(200, 100);
 		break;
 	case SDLK_PLUS:
-		bunny->speedUp();
+		//bunny->speedUp();
 		break;
 	case SDLK_MINUS:
-		bunny->speedDown();
+		//bunny->speedDown();
 		break;
 	default:
 		break;
@@ -441,3 +446,13 @@ void FWApplication::Quit()
 //{
 //	//SDL_Set
 //}
+
+Instance* FWApplication::instance(int ID){
+	for (size_t i = 0; i < mCurrentGeneration.size(); i++){
+		if (mCurrentGeneration.at(i)->mID == ID){
+			return mCurrentGeneration.at(i);
+		}
+	}
+	return nullptr;
+}
+
