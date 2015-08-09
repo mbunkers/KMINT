@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 
-Instance::Instance(){
+Instance::Instance(int ID){
 
 	mCow = new Cow(FWApplication::GetInstance()->LoadTexture("cow-1.png"), nullptr);
 	mBunny = new Bunny(FWApplication::GetInstance()->LoadTexture("rabbit-2.png"), nullptr);
@@ -15,6 +15,19 @@ Instance::Instance(){
 	mBunny->mSteering->setTarget(mCow);
 	mCow->wander();
 	mCow->mSteering->setTarget(mCow);
+
+	mCow->mID = ID;
+	mBunny->mID = ID;
+	mPill->mID = ID;
+	mWeapon->mID = ID;
+
+	mCow->mInstance = this;
+	mBunny->mInstance = this;
+	mPill->mInstance = this;
+	mWeapon->mInstance = this;
+
+	mCow->setNewPosition(100, 150);
+	mBunny->setNewPosition(400, 300);
 
 	addToWorld();
 }

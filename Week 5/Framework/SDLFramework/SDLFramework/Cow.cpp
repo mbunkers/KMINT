@@ -6,7 +6,7 @@
 
 Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mCurrentLocation = startNode;
-	chase((Character *)FWApplication::GetInstance()->getBunny());
+	chase(mInstance->mBunny);
 
 	mVelocity = SVector2D(0, 0);
 	mHeading = SVector2D(1, 0);
@@ -19,7 +19,7 @@ Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mMaxTurnRate = 1;
 
 	mSteering = new SteeringBehaviors(this);
-	mSteering->setTarget((Character *)FWApplication::GetInstance()->getBunny());
+	mSteering->setTarget(mInstance->mBunny);
 	mSteering->persuitOn();
 }
 

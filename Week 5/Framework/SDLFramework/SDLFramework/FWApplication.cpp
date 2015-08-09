@@ -11,6 +11,7 @@
 #include "Cow.h"
 #include "Bunny.h"
 #include "Item.h"
+#include "Instance.h"
 
 FWApplication * FWApplication::mInstance;
 FWApplication::FWApplication(int offsetX, int offsetY, int width, int height)
@@ -71,18 +72,12 @@ FWApplication::FWApplication(int offsetX, int offsetY, int width, int height)
 }
 
 void FWApplication::setup(){
-	Cow *cow = new Cow(LoadTexture("cow-1.png"), nullptr);
-	Bunny *bunny = new Bunny(LoadTexture("rabbit-2.png"), nullptr);
-	cow->setNewPosition(100, 1500);
-	bunny->setNewPosition(400, 300);
-	cow->mSteering->setTarget(bunny);
-	bunny->mSteering->setTarget(cow);
+	mCurrentGeneration = vector<Instance *>();
+	previousGenerations = vector<vector<Instance *>>();
 
-	AddRenderable((IGameObject *)cow);
-	AddRenderable((IGameObject *)bunny);
-
-	mCow = cow;
-	mBunny = bunny;
+	for (int i = 0; i < 4; i++){
+		mCurrentGeneration.push_back(new Instance(i));
+	}
 }
 
 //Node* FWApplication::createNode(int x, int y){

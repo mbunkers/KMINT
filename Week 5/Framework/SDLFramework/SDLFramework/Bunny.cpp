@@ -98,13 +98,13 @@ void Bunny::changeState(){
 			Item *item = nullptr;
 			int r, g, b = 0;
 			if (random == 0){
-				item = (Item *)FWApplication::GetInstance()->getItem();
+				item = mInstance->mPill;
 				r = 255; 
 				g = 255;
 				b = 255;
 			}
 			else {
-				item = (Item *)FWApplication::GetInstance()->getWeapon();
+				item = mInstance->mWeapon;
 				r = 200;
 				g = 200;
 				b = 200;

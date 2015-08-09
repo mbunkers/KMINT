@@ -1,34 +1,34 @@
-﻿Build started 8-8-2015 22:14:25.
+﻿Build started 9-8-2015 14:35:56.
      1>Project "C:\Users\Marcel\Desktop\KMINT\Week 5\Framework\SDLFramework\SDLFramework\SDLFramework.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Marcel\Desktop\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2-2.0.3/include" /I"C:\Users\Marcel\Desktop\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2_ttf-2.0.12/include" /I"C:\Users\Marcel\Desktop\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2_image-2.0.0/include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ASTar.cpp AStarNode.cpp Bunny.cpp Character.cpp ChaseState.cpp Cow.cpp FleeState.cpp FWApplication.cpp Instance.cpp Item.cpp Main.cpp MovingEntity.cpp Node.cpp SearchState.cpp SleepState.cpp State.cpp SteeringBehaviors.cpp WanderingState.cpp Waypoint.cpp
-         Waypoint.cpp
-         WanderingState.cpp
-         SteeringBehaviors.cpp
-         State.cpp
-         SleepState.cpp
-         SearchState.cpp
-         Node.cpp
-         MovingEntity.cpp
-         Main.cpp
-         Item.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Marcel\Desktop\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2-2.0.3/include" /I"C:\Users\Marcel\Desktop\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2_ttf-2.0.12/include" /I"C:\Users\Marcel\Desktop\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2_image-2.0.0/include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bunny.cpp Cow.cpp FWApplication.cpp Instance.cpp
          Instance.cpp
-     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\instance.cpp(5): error C2039: 'Generation' : is not a member of 'Instance'
-                 c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\instance.h(10) : see declaration of 'Instance'
-     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\instance.cpp(5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\instance.cpp(6): warning C4508: 'Generation' : function should return a value; 'void' return type assumed
-     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\instance.cpp(9): error C2523: 'Instance::~Generation' : destructor tag mismatch
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\instance.cpp(24): error C2039: 'mInstance' : is not a member of 'Cow'
+                 c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\cow.h(11) : see declaration of 'Cow'
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\instance.cpp(25): error C2039: 'mInstance' : is not a member of 'Bunny'
+                 c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\bunny.h(10) : see declaration of 'Bunny'
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\instance.cpp(26): error C2039: 'mInstance' : is not a member of 'Item'
+                 c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\item.h(5) : see declaration of 'Item'
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\instance.cpp(27): error C2039: 'mInstance' : is not a member of 'Item'
+                 c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\item.h(5) : see declaration of 'Item'
          FWApplication.cpp
-         FleeState.cpp
          Cow.cpp
-         ChaseState.cpp
-         Character.cpp
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\cow.cpp(9): error C2065: 'mInstance' : undeclared identifier
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\cow.cpp(9): error C2227: left of '->mBunny' must point to class/struct/union/generic type
+                 type is 'unknown-type'
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\cow.cpp(22): error C2065: 'mInstance' : undeclared identifier
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\cow.cpp(22): error C2227: left of '->mBunny' must point to class/struct/union/generic type
+                 type is 'unknown-type'
          Bunny.cpp
-         AStarNode.cpp
-         ASTar.cpp
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\bunny.cpp(101): error C2065: 'mInstance' : undeclared identifier
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\bunny.cpp(101): error C2227: left of '->mPill' must point to class/struct/union/generic type
+                 type is 'unknown-type'
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\bunny.cpp(107): error C2065: 'mInstance' : undeclared identifier
+     1>c:\users\marcel\desktop\kmint\week 5\framework\sdlframework\sdlframework\bunny.cpp(107): error C2227: left of '->mWeapon' must point to class/struct/union/generic type
+                 type is 'unknown-type'
          Generating Code...
      1>Done Building Project "C:\Users\Marcel\Desktop\KMINT\Week 5\Framework\SDLFramework\SDLFramework\SDLFramework.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:20.02
+Time Elapsed 00:00:04.77

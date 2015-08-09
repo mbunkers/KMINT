@@ -14,6 +14,8 @@ struct SDL_Texture;
 typedef struct _TTF_Font TTF_Font;
 //struct SDL_Event;
 
+using namespace std;
+
 //#define SDL_DRAW_PUTPIXEL_BPP(A, B, C)  \
 //*(A(B(Uint8*)super->pixels + (y0+y)*super->pitch +               \
 //                                          (x0+x)*SDL_DRAW_BPP)) = C; \
@@ -255,6 +257,9 @@ public:
 	class IGameObject *getCow();
 	class IGameObject *getItem();
 	class IGameObject *getWeapon();
+
+	vector<class Instance *> mCurrentGeneration;
+	vector<vector< class Instance *>> previousGenerations;
 
 private:
 	std::vector<IGameObject *> mGameObjects;

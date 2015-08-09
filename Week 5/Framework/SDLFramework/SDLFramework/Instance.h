@@ -10,7 +10,7 @@ using namespace std;
 
 class Instance{
 public:
-	Instance();
+	Instance(int ID);
 	~Instance();
 
 	int mID = 0;

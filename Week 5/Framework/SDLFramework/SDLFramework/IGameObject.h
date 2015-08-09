@@ -11,8 +11,7 @@
 
 
 
-class IGameObject
-{
+class IGameObject{
 public:
 	IGameObject() : mIsActive(true) { mApplication = FWApplication::GetInstance(); }
 
@@ -32,6 +31,7 @@ public:
 			mApplication->DrawTexture(mTexture, mX, mY, mWidth, mHeight);
 	}
 
+	int mID = 0;
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// <summary>	Abstract update method </summary>
 	///
