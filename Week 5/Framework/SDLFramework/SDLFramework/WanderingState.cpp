@@ -9,7 +9,12 @@ WanderingState::~WanderingState(){
 }
 
 void WanderingState::Update(){
-	mOwner->mSteering->wanderOn();
+	SVector2D toPursuer = mOwner->mSteering->target()->position() - mOwner->position();
+
+	if (toPursuer.LengthSq() < pow(300, 2)){
+		mOwner->changeState();
+		delete this;
+	}
 }
 
 void WanderingState::Move(float deltaTime){

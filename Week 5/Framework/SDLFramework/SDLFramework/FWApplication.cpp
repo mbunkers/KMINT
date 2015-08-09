@@ -82,6 +82,7 @@ void FWApplication::setup(){
 		Instance *newInstance = new Instance(i);
 		mCurrentGeneration.push_back(newInstance);
 		newInstance->setDefaultStates();
+		newInstance->setCowStateChance();
 	}
 }
 

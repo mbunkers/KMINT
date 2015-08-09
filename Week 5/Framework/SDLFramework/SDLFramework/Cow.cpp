@@ -24,8 +24,7 @@ Cow::~Cow(){
 
 void Cow::Update(float deltaTime){
 	Character::Update(deltaTime);
-
-	SVector2D toPursuer = mSteering->target()->position() - position();
+	mCurrentState->Update();
 }
 
 void Cow::defaultState(){
@@ -46,28 +45,40 @@ void Cow::move(){
 }
 
 void Cow::changeState(){
-	SDL_Texture *texture = getTexture();
-	//if (dynamic_cast<ChaseState *>(mCurrentState)){
-	//	mCurrentState = new WanderingState();
-	//	mStateChangeCounter = 3;
-	//	SDL_SetTextureColorMod(texture, 255, 0, 255);
-	//}
-	//else {
-	//	if (dynamic_cast<SearchState *>(mCurrentState)){
-	//		mCurrentState = new ChaseState();
-	//		mCurrentState->mTarget = FWApplication::GetInstance()->getBunny();
-	//		SDL_SetTextureColorMod(texture, 0, 255, 0);
-	//	}
-	//	else {
-	//		if (dynamic_cast<WanderingState *>(mCurrentState)){
-	//			mCurrentState = new SearchState();
-	//			mCurrentState->mTarget = FWApplication::GetInstance()->getItem();
-	//			SDL_SetTextureColorMod(texture, 0, 255, 255);
-	//		}
-	//	}
-	//}
+	int chance = rand() % 101;
 
-	mCurrentState->mOwner = this;
+	vector<int> chanceOptions = vector<int>();
+	chanceOptions.push_back(fleeChance());
+	chanceOptions.push_back(fleePillSearchChance());
+	chanceOptions.push_back(hideChance());
+	chanceOptions.push_back(fleeAndWeaponSearchChance());
+
+	int chanceCalculation = 0;
+	for (size_t i = 0; i < chanceOptions.size(); i++){
+		chanceCalculation += chanceOptions.at(i);
+		if (chance < chanceCalculation){
+			switch (i){
+			case 0:
+				// Flee from bunny
+				break;
+			case 1:
+				// Flee from bunny and search for pill
+				// When got pill, Pass SVector(0,0) but is invincible: Create Invincible state which should be in search state
+				break;
+			case 2:
+				// Pass SVector2D(0,0): Should be in Hide state
+				break;
+			case 3:
+				// Flee from bunny and search for weapon
+				// When got weapon, hide: Should be in search state
+				break;
+			default:
+				break;
+			}
+			return;
+		}
+	}
+	
 }
 
 void Cow::changeTarget(Character *target){

@@ -91,7 +91,10 @@ void Instance::setCowStateChance(){
 
 // Inheritance from previous generation
 void Instance::setCowStateChance(int flee, int fleeAndSearchPill, int hide, int fleeAndSearchWeapon){
-
+	mCow->setFleeChance(flee);
+	mCow->setFleePillSearchChance(fleeAndSearchPill);
+	mCow->setHideChance(hide);
+	mCow->setFleeAndWeaponSearchChance(fleeAndSearchWeapon);
 }
 
 void Instance::addToWorld(){
