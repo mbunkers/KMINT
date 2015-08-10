@@ -13,7 +13,6 @@ void WanderingState::Update(){
 
 	if (toPursuer.LengthSq() < pow(300, 2)){
 		mOwner->changeState();
-		delete this;
 	}
 }
 

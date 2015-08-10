@@ -28,6 +28,7 @@ void Cow::Update(float deltaTime){
 }
 
 void Cow::defaultState(){
+	mSteering->reset();
 	mSteering->wanderOn();
 	wander();
 }
@@ -36,7 +37,7 @@ void Cow::respawn(){
 	mVelocity = SVector2D(0, 0);
 	mHeading = SVector2D(1, 0);
 	mSide = SVector2D(1, 0);
-	setPosition(FWApplication::GetInstance()->bunnySpawnPoint());
+	setPosition(FWApplication::GetInstance()->cowSpawnPoint());
 	defaultState();
 }
 
@@ -57,18 +58,31 @@ void Cow::changeState(){
 	for (size_t i = 0; i < chanceOptions.size(); i++){
 		chanceCalculation += chanceOptions.at(i);
 		if (chance < chanceCalculation){
+			Instance *instance = FWApplication::GetInstance()->instance(mID);
 			switch (i){
 			case 0:
 				// Flee from bunny
+				mSteering->reset();
+				mSteering->fleeOn();
 				break;
 			case 1:
+				mSteering->reset();
+				mSteering->fleeOn();
+				mSteering->seekOn();
+				mSteering->setTarget(instance->mPill->position());
+				search(instance->mPill, 0,0,0);
 				// Flee from bunny and search for pill
 				// When got pill, Pass SVector(0,0) but is invincible: Create Invincible state which should be in search state
 				break;
 			case 2:
 				// Pass SVector2D(0,0): Should be in Hide state
+				mSteering->reset();
 				break;
 			case 3:
+				mSteering->reset();
+				mSteering->fleeOn();
+				mSteering->seekOn();
+				//mSteering->setTarget(instance->mWeapon);
 				// Flee from bunny and search for weapon
 				// When got weapon, hide: Should be in search state
 				break;

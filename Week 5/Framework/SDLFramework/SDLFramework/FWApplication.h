@@ -265,7 +265,7 @@ public:
 		return SVector2D(200, 150);
 	}
 	SVector2D cowSpawnPoint(){
-		return SVector2D(600, 650);
+		return SVector2D(600, 450);
 	}
 
 private:

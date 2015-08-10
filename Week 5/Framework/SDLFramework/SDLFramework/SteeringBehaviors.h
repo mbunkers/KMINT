@@ -39,6 +39,7 @@ public:
 	void setTarget(SVector2D targetPosition);
 	void setTarget(Character *target);
 	
+	void reset();
 	void seekOn();
 	void fleeOn();
 	void evadeOn();

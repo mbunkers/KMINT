@@ -45,18 +45,14 @@ void Character::Update(float deltaTime){
 	SVector2D position(GetBoundingBox().x, GetBoundingBox().y);
 	WrapAround(position, 800, 600);
 	setPosition(position);
-}
 
-SVector2D Character::position(){
-	return SVector2D(GetBoundingBox().x, GetBoundingBox().y);
+	mCurrentState->Update();
 }
 
 void Character::setNewPosition(int x, int y){
 	SetOffset(x, y);
 }
-void Character::setPosition(SVector2D position){
-	SetOffset((uint32_t)position.x, (uint32_t)position.y);
-}
+
 
 void Character::changeState(){
 

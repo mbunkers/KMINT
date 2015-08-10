@@ -16,15 +16,15 @@ Instance::Instance(int ID){
 	mBunny->chase(mCow);
 	mBunny->mSteering->setTarget(mCow);
 	mCow->wander();
-	mCow->mSteering->setTarget(mCow);
+	mCow->mSteering->setTarget(mBunny);
 
 	mCow->mID = ID;
 	mBunny->mID = ID;
 	mPill->mID = ID;
 	mWeapon->mID = ID;
 
-	mCow->setNewPosition(100, 150);
-	mBunny->setNewPosition(400, 300);
+	mCow->setPosition(FWApplication::GetInstance()->cowSpawnPoint());
+	mBunny->setPosition(FWApplication::GetInstance()->bunnySpawnPoint());
 
 	defineColor();
 	addToWorld();
@@ -86,7 +86,8 @@ void Instance::setCowStateChance(){
 		stateChances.at(i) *= 100 / total;
 	}
 
-	setCowStateChance(stateChances[0], stateChances[1], stateChances[2], stateChances[3]);
+	setCowStateChance(0,100,0,0);
+	//setCowStateChance(stateChances[0], stateChances[1], stateChances[2], stateChances[3]);
 }
 
 // Inheritance from previous generation

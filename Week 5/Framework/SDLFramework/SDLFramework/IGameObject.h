@@ -32,6 +32,14 @@ public:
 	}
 
 	int mID = 0;
+
+	SVector2D position(){
+		return SVector2D(GetBoundingBox().x, GetBoundingBox().y);
+	}
+	void setPosition(SVector2D position){
+		SetOffset((uint32_t)position.x, (uint32_t)position.y);
+	}
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// <summary>	Abstract update method </summary>
 	///

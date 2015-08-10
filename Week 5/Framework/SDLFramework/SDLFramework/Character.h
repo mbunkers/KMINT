@@ -24,13 +24,12 @@ public:
 	class Item *mItem = nullptr;
 
 	void defaultState();
-	void respawn();
+	virtual void respawn();
 
 	void Draw();
 	void Update(float deltaTime);
-	SVector2D position();
+	
 	void setNewPosition(int x, int y);
-	void setPosition(SVector2D position);
 	SDL_Texture *getTexture();
 	virtual void changeState();
 	void sleep();

@@ -28,7 +28,8 @@ SVector2D SteeringBehaviors::calculate(){
 	SVector2D steering = SVector2D();
 
 	if (isFleeing){
-		steering += persuit(mTarget);
+		SVector2D fleeForce = flee(mTarget->position());
+		steering = steering + fleeForce;
 	}
 	if (isWandering){
 		SVector2D wanderForce = wander();
@@ -39,7 +40,8 @@ SVector2D SteeringBehaviors::calculate(){
 		steering = (steering + persuit(mTarget));
 	}
 	if (isSeeking){
-		steering += seek(mTarget->position());
+		SVector2D seekForce = seek(mTargetPosition);
+		steering = steering + seekForce;
 	}
 	if (isEvading){
 		SVector2D evadeForce = evade(mTarget);
@@ -51,38 +53,26 @@ SVector2D SteeringBehaviors::calculate(){
 
 void SteeringBehaviors::seekOn(){
 	isSeeking = true;
-	isFleeing = false;
-	isEvading = false;
-	isPersuiting = false;
-	isWandering = false;
 }
 void SteeringBehaviors::fleeOn(){
-	isSeeking = false;
 	isFleeing = true;
-	isEvading = false;
-	isPersuiting = false;
-	isWandering = false;
 }
 void SteeringBehaviors::evadeOn(){
-	isSeeking = false;
-	isFleeing = false;
 	isEvading = true;
-	isPersuiting = false;
-	isWandering = false;
 }
 void SteeringBehaviors::persuitOn(){
-	isSeeking = false;
-	isFleeing = false;
-	isEvading = false;
 	isPersuiting = true;
-	isWandering = false;
 }
 void SteeringBehaviors::wanderOn(){
+	isWandering = true;
+}
+
+void SteeringBehaviors::reset(){
 	isSeeking = false;
 	isFleeing = false;
 	isEvading = false;
 	isPersuiting = false;
-	isWandering = true;
+	isWandering = false;
 }
 
 SVector2D SteeringBehaviors::seek(SVector2D targetPosition){
