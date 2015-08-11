@@ -26,6 +26,8 @@ public:
 	void defaultState();
 	virtual void respawn();
 
+	int mTargetPoints = 0;
+
 	void Draw();
 	void Update(float deltaTime);
 	
@@ -39,6 +41,8 @@ public:
 	void wakeup(Character *target);
 	void search(class Item *item, int r, int g, int b);
 	void chase(Character *target);
+	void hide();
+	void invincible();
 
 	void speedUp();
 	void speedDown();

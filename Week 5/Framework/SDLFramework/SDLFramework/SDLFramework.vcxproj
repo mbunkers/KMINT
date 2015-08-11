@@ -92,7 +92,9 @@
     <ClCompile Include="Cow.cpp" />
     <ClCompile Include="FleeState.cpp" />
     <ClCompile Include="FWApplication.cpp" />
+    <ClCompile Include="HideState.cpp" />
     <ClCompile Include="Instance.cpp" />
+    <ClCompile Include="InvincibleState.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MovingEntity.cpp" />
@@ -118,8 +120,10 @@
     <ClInclude Include="Cow.h" />
     <ClInclude Include="FleeState.h" />
     <ClInclude Include="FWApplication.h" />
+    <ClInclude Include="HideState.h" />
     <ClInclude Include="Instance.h" />
     <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="InvincibleState.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="Node.h" />

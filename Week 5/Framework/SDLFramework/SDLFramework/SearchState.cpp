@@ -9,6 +9,20 @@ SearchState::SearchState() : State(){
 SearchState::~SearchState(){
 }
 
+void SearchState::Update(){
+	if (mOwner->CheckCollision(mOwner->mItem)){
+		mOwner->mItem->setPosition(FWApplication::GetInstance()->itemSpawnPoint());
+
+		if (mOwner->mItem->mIsWeapon){
+			mOwner->hide();
+			mOwner->mSteering->reset();
+		}
+		else {
+			mOwner->invincible();
+			mOwner->mSteering->reset();
+		}
+	}
+}
 
 void SearchState::Move(float deltaTime){
 	Item *target = (Item *)mTarget;

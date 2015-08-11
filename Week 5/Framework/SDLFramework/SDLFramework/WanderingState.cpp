@@ -9,9 +9,8 @@ WanderingState::~WanderingState(){
 }
 
 void WanderingState::Update(){
-	SVector2D toPursuer = mOwner->mSteering->target()->position() - mOwner->position();
-
-	if (toPursuer.LengthSq() < pow(300, 2)){
+	double distance = Vec2DDistance(mOwner->position(), mOwner->mSteering->target()->position());
+	if (distance < 300){
 		mOwner->changeState();
 	}
 }

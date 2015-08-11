@@ -71,6 +71,12 @@
     <ClCompile Include="Instance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HideState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InvincibleState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -104,9 +110,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AStarNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WanderingState.h">
@@ -146,6 +149,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Instance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HideState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InvincibleState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

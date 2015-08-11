@@ -2,6 +2,7 @@
 #include "FWApplication.h"
 #include "Transformations.h"
 #include "Util.h"
+#include "Cow.h"
 
 SteeringBehaviors::SteeringBehaviors(Character *character){
 	mCharacter = character;
@@ -31,6 +32,12 @@ SVector2D SteeringBehaviors::calculate(){
 		SVector2D fleeForce = flee(mTarget->position());
 		steering = steering + fleeForce;
 	}
+	if (isSeeking){
+		if (steering.isZero()){
+			SVector2D seekForce = seek(mTargetPosition);
+			steering = steering + seekForce;
+		}
+	}
 	if (isWandering){
 		SVector2D wanderForce = wander();
 		steering = steering + wanderForce;
@@ -39,13 +46,9 @@ SVector2D SteeringBehaviors::calculate(){
 		SVector2D persuitForce = persuit(mTarget);
 		steering = (steering + persuit(mTarget));
 	}
-	if (isSeeking){
-		SVector2D seekForce = seek(mTargetPosition);
-		steering = steering + seekForce;
-	}
 	if (isEvading){
 		SVector2D evadeForce = evade(mTarget);
-		steering = steering + evadeForce;
+		steering = steering + (evadeForce * 0.8);
 	}
 
 	return steering;
@@ -77,17 +80,29 @@ void SteeringBehaviors::reset(){
 
 SVector2D SteeringBehaviors::seek(SVector2D targetPosition){
 	SVector2D desiredVelocity = Vec2DNormalize(targetPosition - mCharacter->position()) * mCharacter->maxSpeed();
-	return desiredVelocity - mCharacter->velocity();
+	SVector2D velocity = desiredVelocity - mCharacter->velocity();
+	if (dynamic_cast<Cow *>(mCharacter)){
+		//printf("Seek velocity: %.f, %.f\n", velocity.x, velocity.y);
+	}
+
+	return velocity;
 }
 
 SVector2D SteeringBehaviors::flee(SVector2D targetPosition){
-	const double panicDistanceSq = 100.0 * 100.0;
+	const double panicDistanceSq = 300;
+	if (dynamic_cast<Cow *>(mCharacter)){
+		double distance = Vec2DDistance(mCharacter->position(), targetPosition);
+		//printf("Distance: %.f\n", distance);
+		//printf("Panic: %.f\n", panicDistanceSq);
+	}
 	if (Vec2DDistance(mCharacter->position(), targetPosition) > panicDistanceSq){
 		return SVector2D(0,0);
 	}
 
 	SVector2D desiredVelocity = Vec2DNormalize(mCharacter->position() - targetPosition) * mCharacter->maxSpeed();
-	return desiredVelocity - mCharacter->velocity();
+	SVector2D velocity = desiredVelocity - mCharacter->velocity();
+	//printf("Flee velocity: %.f, %.f\n", velocity.x, velocity.y);
+	return velocity;
 }
 
 SVector2D SteeringBehaviors::persuit(Character *target){
@@ -126,6 +141,7 @@ SVector2D SteeringBehaviors::wander(){
 
 	//move the target into a position WanderDist in front of the agent
 	SVector2D targetLocal = mWanderTarget + SVector2D(mWanderDistance, 0);
+	//printf("Position: %.f, %.f\n", targetLocal.x, targetLocal.y);
 
 	//project the target into world space
 	SVector2D targetWorld = PointToWorldSpace(targetLocal, mCharacter->heading(), mCharacter->side(), mCharacter->position());

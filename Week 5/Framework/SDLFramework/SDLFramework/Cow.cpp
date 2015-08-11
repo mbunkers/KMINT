@@ -8,9 +8,9 @@
 Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mCurrentLocation = startNode;
 
-	mSpeed = 100;
+	mSpeed = 50;
 	mMass = 1.0;
-	mMaxSpeed = 150;
+	mMaxSpeed = 75;
 	mMaxForce = 400;
 	mMaxTurnRate = 1;
 
@@ -34,7 +34,7 @@ void Cow::defaultState(){
 }
 
 void Cow::respawn(){
-	mVelocity = SVector2D(0, 0);
+	//mVelocity = SVector2D(0, 0);
 	mHeading = SVector2D(1, 0);
 	mSide = SVector2D(1, 0);
 	setPosition(FWApplication::GetInstance()->cowSpawnPoint());
@@ -64,16 +64,17 @@ void Cow::changeState(){
 				// Flee from bunny
 				mSteering->reset();
 				mSteering->fleeOn();
-				break;
+				return;
 			case 1:
 				mSteering->reset();
-				mSteering->fleeOn();
+				mSteering->evadeOn();
+				//mSteering->fleeOn();
 				mSteering->seekOn();
 				mSteering->setTarget(instance->mPill->position());
 				search(instance->mPill, 0,0,0);
 				// Flee from bunny and search for pill
 				// When got pill, Pass SVector(0,0) but is invincible: Create Invincible state which should be in search state
-				break;
+				return;
 			case 2:
 				// Pass SVector2D(0,0): Should be in Hide state
 				mSteering->reset();
@@ -85,11 +86,10 @@ void Cow::changeState(){
 				//mSteering->setTarget(instance->mWeapon);
 				// Flee from bunny and search for weapon
 				// When got weapon, hide: Should be in search state
-				break;
+				return;
 			default:
-				break;
+				return;
 			}
-			return;
 		}
 	}
 	

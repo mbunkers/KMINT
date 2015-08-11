@@ -255,6 +255,11 @@ void FWApplication::RenderGameObjects()
 	{
 		obj->Draw();
 	}
+
+	Instance *instance1 = instance(0);
+
+	DrawText("Koe: #" + to_string(instance1->mCow->mTargetPoints), 100, 100);
+	DrawText("Haas: #" + to_string(instance1->mBunny->mTargetPoints), 100, 120);
 }
 
 void FWApplication::SetTargetFPS(unsigned short target)
@@ -397,10 +402,10 @@ uint32_t FWApplication::GetTimeSinceStartedMS() const
 {
 	return mTimeMS;
 }
-/*
+
 void FWApplication::DrawText(const std::string & message, uint32_t offsetX, uint32_t offsetY)
 {
-	SDL_Color color = { mColor.r, mColor.g, mColor.b, mColor.a };
+	SDL_Color color = { 0, 0, 0, 1.0 };
 	//SDL_Color bgColor = { mTextBackgroundColor.r, mTextBackgroundColor.g, mTextBackgroundColor.b, mTextBackgroundColor.a };
 
 	SDL_Surface * surface = TTF_RenderText_Blended(mFont, message.c_str(), color);
@@ -415,7 +420,7 @@ void FWApplication::DrawText(const std::string & message, uint32_t offsetX, uint
 		SDL_DestroyTexture(texture);
 	}
 }
-*/
+
 void FWApplication::SetFontSize(int ptSize)
 {
 	mFontSize = ptSize;
@@ -457,3 +462,9 @@ Instance* FWApplication::instance(int ID){
 	return nullptr;
 }
 
+SVector2D FWApplication::itemSpawnPoint(){
+	int x = rand() % (800 - 10) + 10;
+	int y = rand() % (600 - 10) + 10;
+
+	return SVector2D(x, y);
+}

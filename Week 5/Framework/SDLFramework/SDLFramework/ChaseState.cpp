@@ -4,6 +4,8 @@
 #include <SDL.h>
 #include "FleeState.h"
 #include "SearchState.h"
+#include "HideState.h"
+#include "InvincibleState.h"
 
 ChaseState::ChaseState() : State(){
 	mMoveTarget = true;
@@ -16,15 +18,22 @@ ChaseState::~ChaseState(){
 void ChaseState::Update(){
 	if (mOwner->CheckCollision(mOwner->mSteering->target())){
 		if (dynamic_cast<FleeState *>(mOwner->mSteering->target()->mCurrentState) || dynamic_cast<SearchState *>(mOwner->mSteering->target()->mCurrentState)){
+			mOwner->mTargetPoints += 10;
 			mOwner->respawn();
 			mOwner->mSteering->target()->respawn();
 			// Owner gets 10 points
 		}
 		else {
-			// TODO: Hide
-			if (dynamic_cast<FleeState *>(mOwner->mSteering->target()->mCurrentState)){
+			if (dynamic_cast<HideState *>(mOwner->mSteering->target()->mCurrentState)){
 				mOwner->respawn();
 				mOwner->mSteering->target()->respawn();
+			}
+			else {
+				if (dynamic_cast<InvincibleState *>(mOwner->mSteering->target()->mCurrentState)){
+					mOwner->respawn();
+					//mOwner->mSteering->target()->respawn();
+					mOwner->mSteering->target()->mTargetPoints += 1;
+				}
 			}
 		}
 	}

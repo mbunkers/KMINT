@@ -9,7 +9,7 @@ Instance::Instance(int ID){
 
 	mCow = new Cow(FWApplication::GetInstance()->LoadTexture("cow-1.png"), nullptr);
 	mBunny = new Bunny(FWApplication::GetInstance()->LoadTexture("rabbit-2.png"), nullptr);
-	mWeapon = new Item(FWApplication::GetInstance()->LoadTexture("gun - metal.png"));
+	mWeapon = new Item(FWApplication::GetInstance()->LoadTexture("gun-metal.png"));
 	mPill = new Item(FWApplication::GetInstance()->LoadTexture("pill.png"));
 
 	mWeapon->mIsWeapon = true;
@@ -25,6 +25,8 @@ Instance::Instance(int ID){
 
 	mCow->setPosition(FWApplication::GetInstance()->cowSpawnPoint());
 	mBunny->setPosition(FWApplication::GetInstance()->bunnySpawnPoint());
+	mPill->setPosition(FWApplication::GetInstance()->itemSpawnPoint());
+	mWeapon->setPosition(FWApplication::GetInstance()->itemSpawnPoint());
 
 	defineColor();
 	addToWorld();
@@ -86,8 +88,8 @@ void Instance::setCowStateChance(){
 		stateChances.at(i) *= 100 / total;
 	}
 
-	setCowStateChance(0,100,0,0);
-	//setCowStateChance(stateChances[0], stateChances[1], stateChances[2], stateChances[3]);
+	//setCowStateChance(0,100,0,0);
+	setCowStateChance(stateChances[0], stateChances[1], stateChances[2], stateChances[3]);
 }
 
 // Inheritance from previous generation

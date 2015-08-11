@@ -5,6 +5,9 @@
 #include "SearchState.h"
 #include "ChaseState.h"
 #include "SleepState.h"
+#include "HideState.h"
+#include "InvincibleState.h"
+#include "Cow.h"
 
 Character::Character(SDL_Texture *texture){
 	SetTexture(texture);
@@ -35,6 +38,10 @@ void Character::Update(float deltaTime){
 
 	SVector2D newPosition = position();
 	newPosition = newPosition + (mVelocity * deltaTime);
+	if (dynamic_cast<Cow *>(this)){
+		//printf("Acceleration: %.f, %.f\n", acceleration.x, acceleration.y);
+		//printf("New position: %.f, %.f\n\n", newPosition.x, newPosition.y);
+	}
 	setPosition(newPosition);
 
 	if (mVelocity.LengthSq() > 0.00000001){
@@ -89,7 +96,7 @@ void Character::search(class Item *item, int r, int g, int b){
 	mCurrentState = new SearchState();
 	mCurrentState->mOwner = this;
 	mItem = item;
-	mCurrentState->mTarget = mItem;
+	//mCurrentState->mTarget = mItem;
 }
 
 void Character::chase(Character *target){
@@ -104,6 +111,16 @@ void Character::wander(){
 	mCurrentState = new WanderingState();
 	mCurrentState->mOwner = this;
 	mItem = nullptr;
+}
+
+void Character::hide(){
+	mCurrentState = new HideState();
+	mCurrentState->mOwner = this;
+}
+
+void Character::invincible(){
+	mCurrentState = new InvincibleState();
+	mCurrentState->mOwner = this;
 }
 
 void Character::speedUp(){

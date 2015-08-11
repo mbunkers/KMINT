@@ -11,14 +11,14 @@ Bunny::Bunny(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mCurrentLocation = startNode;
 	mStateChangeCounter = 5;
 
-	mSpeed = 200;
+	mSpeed = 100;
 	mMass = 1;
-	mMaxSpeed = 300;
+	mMaxSpeed = 150;
 	mMaxForce = 400;
 	mMaxTurnRate = 1;
 
-	respawn();
 	mSteering = new SteeringBehaviors(this);
+	respawn();
 }
 
 
@@ -30,6 +30,7 @@ void Bunny::defaultState(){
 	Instance *instance = FWApplication::GetInstance()->instance(mID);
 	if (instance != nullptr){
 		mSteering->setTarget(instance->mCow);
+		mSteering->reset();
 		mSteering->persuitOn();
 		chase(instance->mCow);
 	}
