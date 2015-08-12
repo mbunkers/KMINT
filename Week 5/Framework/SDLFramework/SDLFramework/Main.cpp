@@ -33,19 +33,7 @@ int main(int argc, char *args[]){
 	{
 		application->StartTick();
 
-		SDL_Event event;
-		while (SDL_PollEvent(&event))
-		{
-			switch (event.type)
-			{
-			case SDL_QUIT:
-				application->Quit();
-				break;
-			case SDL_KEYDOWN:
-				application->handleEvent(event.key.keysym.sym);
-			}
-		}
-
+		application->handleRun();
 		application->UpdateGameObjects();
 		application->RenderGameObjects();
 		

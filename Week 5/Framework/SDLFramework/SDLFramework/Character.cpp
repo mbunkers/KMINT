@@ -13,6 +13,7 @@ Character::Character(SDL_Texture *texture){
 	SetTexture(texture);
 	SetSize(70, 70);
 	mMaxForce = 400;
+	mTargetPoints = 0;
 }
 
 Character::~Character(){

@@ -252,13 +252,14 @@ public:
 	void Quit();
 	//void AddOnEvent(std::function<void(SDL_Event*)> func);
 	void setup();
-	void handleEvent(SDL_Keycode keycode);
+	void handleRun();
 
 	class IGameObject *getBunny();
 	class IGameObject *getCow();
 	class IGameObject *getItem();
 	class IGameObject *getWeapon();
 
+	int mRun = 1;
 	class Instance* instance(int ID);
 
 	SVector2D bunnySpawnPoint(){

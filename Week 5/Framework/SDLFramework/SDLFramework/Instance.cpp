@@ -83,21 +83,18 @@ void Instance::setCowStateChance(){
 		stateChances.push_back(randomChance);
 	}
 
-	// Normalize these numbers
-	for (size_t i = 0; i < stateChances.size(); i++){
-		stateChances.at(i) *= 100 / total;
-	}
-
 	//setCowStateChance(0,100,0,0);
 	setCowStateChance(stateChances[0], stateChances[1], stateChances[2], stateChances[3]);
 }
 
 // Inheritance from previous generation
 void Instance::setCowStateChance(int flee, int fleeAndSearchPill, int hide, int fleeAndSearchWeapon){
-	mCow->setFleeChance(flee);
-	mCow->setFleePillSearchChance(fleeAndSearchPill);
-	mCow->setHideChance(hide);
-	mCow->setFleeAndWeaponSearchChance(fleeAndSearchWeapon);
+	int total = flee + fleeAndSearchPill + hide + fleeAndSearchWeapon;
+
+	mCow->setFleeChance(flee * 100 /total);
+	mCow->setFleePillSearchChance(fleeAndSearchPill * 100 / total);
+	mCow->setHideChance(hide * 100 / total);
+	mCow->setFleeAndWeaponSearchChance(fleeAndSearchWeapon * 100 / total);
 }
 
 void Instance::addToWorld(){
