@@ -12,6 +12,7 @@
 #include "Bunny.h"
 #include "Item.h"
 #include "Instance.h"
+#include "Generation.h"
 
 FWApplication * FWApplication::mInstance;
 FWApplication::FWApplication(int offsetX, int offsetY, int width, int height)
@@ -205,106 +206,18 @@ void FWApplication::handleRun(){
 			mIsRunning = false;
 			return;
 		}
-		// Nieuwe run
-		vector<Instance *> elderly = vector<Instance *>();
-		for (size_t i = 0; i < mCurrentGeneration.size(); i++){
-			Instance *instance = mCurrentGeneration.at(i);
-			elderly.push_back(instance);
-		}
+		printf("Run: %d\n", mRun);
+		Generation currentGeneration(mCurrentGeneration);
+		vector<Instance *> newGeneration = currentGeneration.newGeneration();
 
-		previousGenerations.push_back(elderly);
-
-		int totalValue = 0;
-		for (size_t i = 0; i < elderly.size(); i++){
-			Instance *instance = elderly.at(i);
-			totalValue += instance->mCow->mTargetPoints;
-		}
-		printf("Totale waarde: %d\n", totalValue);
-		if (totalValue == 0){
-			for (size_t i = 0; i < elderly.size(); i++){
-				Instance *instance = elderly.at(i);
-				instance->mCow->mTargetPoints = 1;
-			}
-		}
-
-		vector<Instance *> participation = vector<Instance *>();
-		vector<double> fractions = vector<double>();
-		for (size_t i = 0; i < elderly.size(); i++){
-			Instance *instance = elderly.at(i);
-			double fraction = instance->mCow->mTargetPoints / totalValue;
-			fractions.push_back(fraction * elderly.size());
-			printf("Instance %d fraction: %f\n", i, fraction);
-			printf("Instance %d expected: %f\n", i, (fraction * elderly.size()));
-			if ((int)(fraction * elderly.size()) >= 1){
-				participation.push_back(instance);
-			}
-		}
-
-		vector<double> digits = vector<double>();
-		for (size_t i = 0; i < fractions.size(); i++){
-			double fraction = fractions.at(i);
-			double digit = fraction - (long)fraction;
-			digits.push_back(digit);
-		}
-
-		while (participation.size() < elderly.size()){
-			double highest = 0;
-			Instance *highestInstance = nullptr;
-			size_t index = 0;
-
-			for (size_t i = 0; i < digits.size(); i++){
-				double digit = digits.at(i);
-				if (digit >= highest){
-					highest = digit;
-					highestInstance = mCurrentGeneration.at(i);
-					index = i;
-				}
-			}
-
-			if (highestInstance != nullptr){
-				participation.push_back(highestInstance);
-				digits.erase(digits.begin() + index);
-				mCurrentGeneration.erase(mCurrentGeneration.begin() + index);
-			}
-		}
-
+		previousGenerations.push_back(mCurrentGeneration);
 		mCurrentGeneration.erase(mCurrentGeneration.begin(), mCurrentGeneration.end());
 
-		for (size_t i = 0; i < participation.size(); i += 2){
-			Instance *instance1 = participation.at(i);
-			Instance *instance2 = participation.at(i + 1);
-
-			vector<int> chance1 = vector<int>();
-			vector<int> chance2 = vector<int>();
-
-			chance1.push_back(instance1->mCow->fleeChance());
-			chance1.push_back(instance1->mCow->fleePillSearchChance());
-			chance1.push_back(instance2->mCow->hideChance());
-			chance1.push_back(instance2->mCow->fleeAndWeaponSearchChance());
-
-			chance2.push_back(instance2->mCow->fleeChance());
-			chance2.push_back(instance2->mCow->fleePillSearchChance());
-			chance2.push_back(instance1->mCow->hideChance());
-			chance2.push_back(instance1->mCow->fleeAndWeaponSearchChance());
-
-			Instance *subject1 = new Instance((int)i);
-			Instance *subject2 = new Instance((int)i + 1);
-
-			subject1->setCowStateChance(chance1[0], chance1[1], chance1[2], chance1[3]);
-			subject2->setCowStateChance(chance2[0], chance2[1], chance2[2], chance2[3]);
-
-			int targetPoints = (instance1->mCow->mTargetPoints / 2) + (instance2->mCow->mTargetPoints / 2);
-
-			subject1->mCow->mTargetPoints = targetPoints;
-			subject2->mCow->mTargetPoints = targetPoints;
-
-			mCurrentGeneration.push_back(subject1);
-			mCurrentGeneration.push_back(subject2);
+		for (size_t i = 0; i < previousGenerations.at(previousGenerations.size() - 1).size(); i++){
+			previousGenerations.at(previousGenerations.size() - 1).at(i)->removeFromWorld();
 		}
 
-		for (size_t i = 0; i < elderly.size(); i++){
-			elderly.at(i)->removeFromWorld();
-		}
+		mCurrentGeneration = newGeneration;
 	}
 }
 
