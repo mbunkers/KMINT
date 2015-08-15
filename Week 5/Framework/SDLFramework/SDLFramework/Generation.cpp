@@ -34,6 +34,9 @@ void Generation::noDominance(int totalValue){
 vector<Instance *> Generation::bestChances(int totalValue){
 	vector<Instance *> chances = vector<Instance *>();
 
+	Instance *mostEfficientInstance = nullptr;
+	double mostEfficientChance = -1;
+
 	for (size_t i = 0; i < mGeneration.size(); i++){
 		Instance *instance = mGeneration.at(i);
 		double chance = (double)instance->mCow->mTargetPoints / (double)totalValue * mGeneration.size();
@@ -41,7 +44,14 @@ vector<Instance *> Generation::bestChances(int totalValue){
 		if ((int)chance >= 1){
 			chances.push_back(instance);
 		}
+
+		if (chance > mostEfficientChance){
+			mostEfficientInstance = instance;
+			mostEfficientChance = chance;
+		}
 	}
+
+	printf("Instance %d was most efficient\n\n", mostEfficientInstance->mID);
 
 	return chances;
 }
@@ -100,8 +110,11 @@ Instance* Generation::newInstance(int ID, Instance *parent1, Instance *parent2){
 }
 
 vector<Instance *> Generation::newGeneration(){
-	// Calculate totalPoints, if zero then give all 1 point
+	// Calculate totalPoints, if zero then set 1 point
 	int totalValue = totalPoints();
+	if (totalValue == 0){
+		totalValue = 1;
+	}
 	
 	vector<Instance *> participation = vector<Instance *>();
 	
@@ -122,19 +135,19 @@ vector<Instance *> Generation::newGeneration(){
 
 	for (size_t i = 0; i < participation.size(); i++){
 		Instance *instance = participation.at(i);
-		printf("Participant: Koe%d\n", instance->mID);
+		printf("Participant: Koe%d, flee: %d, search pill: %d, hide: %d, search weapon: %d\n", instance->mID, instance->mCow->fleeChance(), instance->mCow->fleePillSearchChance(), instance->mCow->hideChance(), instance->mCow->fleeAndWeaponSearchChance());
 	}
 
 
 	vector<Instance *> newGeneration = vector<Instance *>();
 	for (size_t i = 0; i < participation.size(); i += 2){
 		newGeneration.push_back(newInstance(i, participation.at(i), participation.at(i + 1)));
-		newGeneration.push_back(newInstance(i + 1, participation.at(i), participation.at(i + 1)));
+		newGeneration.push_back(newInstance(i + 1, participation.at(i + 1), participation.at(i)));
 	}
 
 	for (size_t i = 0; i < newGeneration.size(); i++){
 		Instance *instance = newGeneration.at(i);
-		printf("Subject: Koe%d(%d)\n", instance->mID, instance->mCow->mTargetPoints);
+		printf("Subject: Koe%d, flee: %d, search pill: %d, hide: %d, search weapon: %d\n", instance->mID, instance->mCow->fleeChance(), instance->mCow->fleePillSearchChance(), instance->mCow->hideChance(), instance->mCow->fleeAndWeaponSearchChance());
 	}
 
 	printf("\n\n");

@@ -33,11 +33,17 @@ void Cow::defaultState(){
 	wander();
 }
 
-void Cow::respawn(){
-	//mVelocity = SVector2D(0, 0);
+void Cow::respawn(bool newState){
+	mVelocity = SVector2D(1, 0);
 	mHeading = SVector2D(1, 0);
 	mSide = SVector2D(1, 0);
 	setPosition(FWApplication::GetInstance()->cowSpawnPoint());
+	if (newState){
+		respawn();
+	}
+}
+
+void Cow::respawn(){
 	defaultState();
 }
 

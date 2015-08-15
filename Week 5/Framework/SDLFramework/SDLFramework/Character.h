@@ -25,6 +25,7 @@ public:
 
 	void defaultState();
 	virtual void respawn();
+	virtual void respawn(bool newState);
 
 	int mTargetPoints = 0;
 

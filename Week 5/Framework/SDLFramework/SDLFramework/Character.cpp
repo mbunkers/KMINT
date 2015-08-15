@@ -74,6 +74,10 @@ void Character::respawn(){
 
 }
 
+void Character::respawn(bool newState){
+
+}
+
 void Character::wakeup(){
 	wander();
 }

@@ -10,7 +10,7 @@ FleeState::~FleeState(){
 }
 
 void FleeState::Update(){
-	mOwner->mSteering->evadeOn();
+	//mOwner->mSteering->evadeOn();
 }
 
 void FleeState::Move(float deltaTime){

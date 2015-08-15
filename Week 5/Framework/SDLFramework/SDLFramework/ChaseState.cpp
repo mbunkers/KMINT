@@ -20,18 +20,17 @@ void ChaseState::Update(){
 		if (dynamic_cast<FleeState *>(mOwner->mSteering->target()->mCurrentState) || dynamic_cast<SearchState *>(mOwner->mSteering->target()->mCurrentState)){
 			mOwner->mTargetPoints += 10;
 			mOwner->respawn();
-			mOwner->mSteering->target()->respawn();
-			// Owner gets 10 points
+			mOwner->mSteering->target()->respawn(true);
 		}
 		else {
 			if (dynamic_cast<HideState *>(mOwner->mSteering->target()->mCurrentState)){
 				mOwner->respawn();
-				mOwner->mSteering->target()->respawn();
+				mOwner->mSteering->target()->respawn(true);
 			}
 			else {
 				if (dynamic_cast<InvincibleState *>(mOwner->mSteering->target()->mCurrentState)){
 					mOwner->respawn();
-					//mOwner->mSteering->target()->respawn();
+					mOwner->mSteering->target()->respawn(false);
 					mOwner->mSteering->target()->mTargetPoints += 1;
 				}
 			}

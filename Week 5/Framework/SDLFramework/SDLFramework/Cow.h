@@ -48,6 +48,7 @@ public:
 
 	void Update(float deltaTime);
 	void respawn();
+	void respawn(bool newState);
 	void defaultState();
 	void move();
 	void changeTarget(Character *target);
