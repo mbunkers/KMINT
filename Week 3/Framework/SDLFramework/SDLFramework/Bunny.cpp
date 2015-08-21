@@ -35,45 +35,70 @@ void Bunny::flee(){
 	
 }
 
-void Bunny::changeState(){
-	SDL_Texture *texture = getTexture();
-	if (dynamic_cast<WanderingState *>(mCurrentState)){
-		if (mCurrentLocation->mNeighbours.size() == 2){
-			flee();
-		}
-		else {
-			// Change of 50%
-			int random = (0 + rand() % (int)2);
-			Item *item = nullptr;
-			int r, g, b = 0;
-			if (random == 0){
-				item = (Item *)FWApplication::GetInstance()->getItem();
-				r = 255;
-				g = 255;
-				b = 255;
+void Bunny::Update(float deltaTime){
+	if (dynamic_cast<ChaseState *>(mCurrentState)){
+		if (mItem != nullptr){
+			if (mItem->mIsWeapon){
+				for (size_t i = 0; i < mCurrentLocation->mNeighbours.size(); i++){
+					Waypoint *waypoint = (Waypoint *)mCurrentLocation->mNeighbours.at(i);
+					Node *node = waypoint->OtherNode(mCurrentLocation);
+					if (node->hasCharacter()){
+						((Character *)FWApplication::GetInstance()->getCow())->respawn();
+						((Character *)FWApplication::GetInstance()->getCow())->chase(this);
+						wander();
+						break;
+					}
+				}
 			}
 			else {
-				item = (Item *)FWApplication::GetInstance()->getWeapon();
-				r = 200;
-				g = 200;
-				b = 200;
+				if (mCurrentLocation->mCharacters.size() > 1){
+					((Character *)FWApplication::GetInstance()->getCow())->sleep();
+					wander();
+				}
 			}
+		}
+	}
+	else {
+		if (dynamic_cast<WanderingState *>(mCurrentState)){
+			Character *cow = (Character *)FWApplication::GetInstance()->getCow();
+			if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
+				for (size_t i = 0; i < mCurrentLocation->mNeighbours.size(); i++){
+					Waypoint *waypoint = (Waypoint *)mCurrentLocation->mNeighbours.at(i);
+					Node *node = waypoint->OtherNode(mCurrentLocation);
+					if (node->hasCharacter()){
+						changeState();
+						break;
+					}
+				}
+			}
+		}
+	}
+}
 
-			search(item, r, g, b);
+void Bunny::changeState(){
+	// Flee = 20%, search pill = 40%, search weapon = 40%
+	vector<int> chances = vector<int>();
+	chances.push_back(20);
+	chances.push_back(40);
+	chances.push_back(40);
+
+	int random = (0 + rand() % (int)101);
+	int choice = 0;
+	for (size_t i = 0; i < chances.size(); i++){
+		int between = choice;
+		choice += chances.at(i);
+		if (between < random && choice > random){
+			switch (i){
+			case 1:
+				search((Item *)FWApplication::GetInstance()->getItem(), 255, 255, 0);
+				return;
+			case 2:
+				search((Item *)FWApplication::GetInstance()->getWeapon(), 200, 200, 200);
+				return;
+			default:
+				flee();
+				return;
+			}
 		}
-	}
-	else if (dynamic_cast<FleeState *>(mCurrentState)){
-		wander();
-	}
-	else if (dynamic_cast<SearchState *>(mCurrentState)){
-		if (mCurrentLocation->mItem == mCurrentState->mTarget){
-			chase((Character *)FWApplication::GetInstance()->getCow());
-		}
-		else {
-			wander();
-		}
-	}
-	else if (dynamic_cast<ChaseState *>(mCurrentState)){
-		wander();
 	}
 }

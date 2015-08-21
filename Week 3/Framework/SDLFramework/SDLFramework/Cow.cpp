@@ -26,15 +26,22 @@ void Cow::changeState(){
 		if (dynamic_cast<SearchState *>(mCurrentState)){
 			chase((Character *)FWApplication::GetInstance()->getBunny());
 		}
-		else {
-			if (dynamic_cast<WanderingState *>(mCurrentState)){
-				search((Item *)FWApplication::GetInstance()->getItem(), 100, 100, 100);
-			}
-		}
 	}
 }
 
-void Cow::Update(float dt){
+void Cow::Update(float deltaTime){
+	if (mCurrentState->mMoveTarget){
+		if (dynamic_cast<ChaseState *>(mCurrentState)){
+			if (mCurrentLocation->mCharacters.size() > 1){
+				Character *bunny = ((Character *)FWApplication::GetInstance()->getBunny());
+				// Otherwise should the bunny takes the according action as it wins
+				if (bunny->mItem == nullptr || bunny->mItem->mIsWeapon){
+					bunny->wander();
+					bunny->respawn();
+				}
+			}
+		}
+	}
 }
 
 void Cow::changeTarget(Character *target){

@@ -27,6 +27,35 @@ void Character::Update(float deltaTime){
 	//IGameObject::Update(deltaTime);
 }
 
+void Character::respawn(){
+	Node *newNode = nullptr;
+
+	while (newNode == nullptr){
+		Node *candidateNode = FWApplication::GetInstance()->randomNode();
+		if (!candidateNode->hasCharacter()){
+			bool enemyInRange = false;
+
+			for (size_t i = 0; i < candidateNode->mNeighbours.size(); i++){
+				Node *otherLocation = ((Waypoint *)candidateNode->mNeighbours.at(i))->OtherNode(candidateNode);
+				if (otherLocation->hasCharacter()){
+					enemyInRange = true;
+				}
+			}
+
+			if (!enemyInRange){
+				newNode = candidateNode;
+			}
+		}
+	}
+
+	newNode->setCharacter(this);
+	mCurrentLocation->removeCharacter(this);
+	mCurrentLocation = newNode;
+	mItem = nullptr;
+
+	FWApplication::GetInstance()->resetTurn();
+}
+
 void Character::setNewPosition(int x, int y){
 	SetOffset(x, y);
 }
@@ -62,8 +91,7 @@ void Character::search(class Item *item, int r, int g, int b){
 	SDL_Texture *texture = getTexture();
 	mCurrentState = new SearchState();
 	mCurrentState->mOwner = this;
-	mItem = item;
-	mCurrentState->mTarget = mItem;
+	mCurrentState->mTarget = item;
 	SDL_SetTextureColorMod(texture, r, g, b);
 }
 

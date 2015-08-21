@@ -254,6 +254,10 @@ public:
 	class IGameObject *getItem();
 	class IGameObject *getWeapon();
 
+	class Node * randomNode();
+
+	void resetTurn();
+
 private:
 	std::vector<IGameObject *> mGameObjects;
 	static FWApplication * mInstance;

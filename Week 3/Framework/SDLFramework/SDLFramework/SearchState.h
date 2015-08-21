@@ -9,6 +9,7 @@ public:
 	~SearchState();
 
 	void Move();
+	string name();
 };
 
 #endif

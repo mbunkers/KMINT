@@ -19,6 +19,8 @@ public:
 	class Node *mCurrentLocation;
 	class Item *mItem = nullptr;
 
+	void respawn();
+
 	void Draw();
 	void Update(float deltaTime);
 	void setNewPosition(int x, int y);

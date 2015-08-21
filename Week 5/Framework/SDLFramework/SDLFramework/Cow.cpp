@@ -62,8 +62,9 @@ void Cow::changeState(){
 
 	int chanceCalculation = 0;
 	for (size_t i = 0; i < chanceOptions.size(); i++){
+		int between = chanceCalculation;
 		chanceCalculation += chanceOptions.at(i);
-		if (chance < chanceCalculation){
+		if (between < chance && chanceCalculation > chance){
 			Instance *instance = FWApplication::GetInstance()->instance(mID);
 			switch (i){
 			case 0:

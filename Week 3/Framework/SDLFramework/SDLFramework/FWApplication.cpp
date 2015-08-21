@@ -77,6 +77,8 @@ void FWApplication::setup(){
 	Node *node3 = new Node(500, 130, 50, 50, LoadTexture("node.png"));
 	Node *node4 = new Node(430, 65, 50, 50, LoadTexture("node.png"));
 	Node *node5 = new Node(400, 204, 50, 50, LoadTexture("node.png"));
+	Node *node6 = new Node(250, 300, 50, 50, LoadTexture("node.png"));
+	Node *node7 = new Node(470, 350, 50, 50, LoadTexture("node.png"));
 
 	node1->addNeighbour(node2, 1);
 	node2->addNeighbour(node5, 6);
@@ -84,12 +86,18 @@ void FWApplication::setup(){
 	node1->addNeighbour(node4, 2);
 	node4->addNeighbour(node3, 2);
 	node1->addNeighbour(node5, 8);
+	node6->addNeighbour(node7, 8);
+	node6->addNeighbour(node2, 1);
+	node7->addNeighbour(node5, 3);
+
 
 	AddRenderable((IGameObject *)node1);
 	AddRenderable((IGameObject *)node2);
 	AddRenderable((IGameObject *)node3);
 	AddRenderable((IGameObject *)node4);
 	AddRenderable((IGameObject *)node5);
+	AddRenderable((IGameObject *)node6);
+	AddRenderable((IGameObject *)node7);
 
 	Cow *cow = new Cow(LoadTexture("cow-1.png"), node2);
 	Bunny *bunny = new Bunny(LoadTexture("rabbit-2.png"), node3);
@@ -240,6 +248,12 @@ IGameObject * FWApplication::getWeapon(){
 	return mWeapon;
 }
 
+class Node * FWApplication::randomNode(){
+	int size = mGameObjects.size();
+	int random = (0 + rand() % (int)size);
+	return (Node *)mGameObjects.at(random);
+}
+
 void FWApplication::handleEvent(){
 	Cow *cow = (Cow *)mCow;
 	Bunny *bunny = (Bunny *)mBunny;
@@ -251,93 +265,10 @@ void FWApplication::handleEvent(){
 		bunny->move();
 	}
 	mCowTurn = !mCowTurn;
+}
 
-	if (cow->mCurrentState->mMoveTarget){
-		if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
-			if (cow->mCurrentLocation->mCharacters.size() > 1){
-				if (bunny->mItem != nullptr && bunny->mItem->mIsWeapon){
-					cow->sleep();
-					bunny->wander();
-				}
-				else {
-					// Check state of bunny
-					Character *characterToMove = bunny;
-					Character *otherCharacter = cow;
-					if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
-						characterToMove = bunny;
-						otherCharacter = cow;
-					}
-					else {
-						mCowTurn = false;
-					}
-					Node *newNode = nullptr;
-
-					while (newNode == nullptr){
-						int size = mGameObjects.size();
-						int random = (0 + rand() % (int)size);
-
-						Node *candidateNode = (Node *)mGameObjects.at(random);
-						if (!candidateNode->hasCharacter()){
-							newNode = candidateNode;
-						}
-					}
-
-					newNode->setCharacter(characterToMove);
-					characterToMove->mCurrentLocation->removeCharacter(characterToMove);
-					characterToMove->mCurrentLocation = newNode;
-					characterToMove->changeState();
-					otherCharacter->changeState();
-				}
-			}
-			else if (dynamic_cast<ChaseState *>(bunny->mCurrentState)){
-				if (bunny->mItem != nullptr){
-					if (bunny->mItem->mIsWeapon){
-						for (size_t i = 0; i < bunny->mCurrentLocation->mNeighbours.size(); i++){
-							Waypoint *waypoint = (Waypoint *)bunny->mCurrentLocation->mNeighbours.at(i);
-							Node *node = waypoint->OtherNode(bunny->mCurrentLocation);
-							if (node->hasCharacter()){
-
-								Node *newNode = nullptr;
-
-								while (newNode == nullptr){
-									int size = mGameObjects.size();
-									int random = (0 + rand() % (int)size);
-
-									Node *candidateNode = (Node *)mGameObjects.at(random);
-									if (!candidateNode->hasCharacter()){
-										newNode = candidateNode;
-									}
-								}
-
-								newNode->setCharacter(cow);
-								cow->mCurrentLocation->removeCharacter(cow);
-								cow->mCurrentLocation = newNode;
-								cow->changeState();
-								bunny->changeState();
-								break;
-							}
-						}
-					}
-				}
-			}
-		}
-		if (dynamic_cast<SearchState *>(cow->mCurrentState)){
-			if (cow->mCurrentLocation->mItem != nullptr){
-				
-				int size = mGameObjects.size();
-				int random = (0 + rand() % (int)size);
-
-				Node *candidateNode = (Node *)mGameObjects.at(random);
-				if (candidateNode != cow->mCurrentLocation){
-					candidateNode->mItem = cow->mCurrentLocation->mItem;
-					cow->mCurrentLocation->mItem = nullptr;
-					candidateNode->mItem->setNewPosition(candidateNode->GetX(), candidateNode->GetY());
-				}
-
-				cow->changeState();
-			}
-		}
-	}
+void FWApplication::resetTurn(){
+	mCowTurn = true;
 }
 
 void FWApplication::EndTick()

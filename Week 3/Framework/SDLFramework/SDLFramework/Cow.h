@@ -16,7 +16,7 @@ public:
 	~Cow();
 
 	void move();
-	void Update(float dt);
+	void Update(float deltaTime);
 	void changeTarget(Character *target);
 	void changeTarget(Cow *target);
 	void changeState();

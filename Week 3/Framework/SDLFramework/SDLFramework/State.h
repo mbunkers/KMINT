@@ -23,7 +23,7 @@ public:
 	virtual void Update();
 
 	void setTarget(Character *target);
-	string name();
+	virtual string name();
 };
 
 #endif
