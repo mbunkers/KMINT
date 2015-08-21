@@ -116,6 +116,7 @@ void Character::wander(){
 	mCurrentState = new WanderingState();
 	mCurrentState->mOwner = this;
 	mItem = nullptr;
+	mSteering->wanderOn();
 }
 
 void Character::hide(){

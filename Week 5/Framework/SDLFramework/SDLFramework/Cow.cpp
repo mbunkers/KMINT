@@ -8,14 +8,14 @@
 Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mCurrentLocation = startNode;
 
-	mSpeed = 100;
+	mSpeed = 50;
 	mMass = 1.0;
 	mMaxSpeed = 150;
 	mMaxForce = 400;
 	mMaxTurnRate = 1;
 
 	mSteering = new SteeringBehaviors(this);
-	respawn();
+	respawn(true);
 }
 
 
@@ -80,7 +80,7 @@ void Cow::changeState(){
 			case 2:
 				mSteering->reset();
 				hide();
-				break;
+				return;
 			case 3:
 				mSteering->reset();
 				mSteering->evadeOn();
@@ -89,6 +89,11 @@ void Cow::changeState(){
 				search(instance->mWeapon, 0, 0, 0);
 				return;
 			default:
+				mSteering->reset();
+				mSteering->evadeOn();
+				mSteering->seekOn();
+				mSteering->setTarget(instance->mPill->position());
+				search(instance->mPill, 0, 0, 0);
 				return;
 			}
 		}

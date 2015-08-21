@@ -104,7 +104,7 @@ Instance* Generation::newInstance(int ID, Instance *parent1, Instance *parent2){
 
 	int targetPoints = parent1Points / 2 + parent2Points / 2;
 
-	subject->mCow->mTargetPoints = targetPoints;
+	//subject->mCow->mTargetPoints = targetPoints;
 
 	return subject;
 }

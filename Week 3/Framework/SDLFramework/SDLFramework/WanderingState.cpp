@@ -11,20 +11,21 @@ WanderingState::~WanderingState(){
 void WanderingState::Move(){
 	if (mOwner != nullptr){
 
-		Node *enemyNode = nullptr;
-		for (size_t i = 0; i < mOwner->mCurrentLocation->mNeighbours.size(); i++){
-			Waypoint *waypoint = (Waypoint *)mOwner->mCurrentLocation->mNeighbours.at(i);
-			Node *node = waypoint->OtherNode(mOwner->mCurrentLocation);
-			if (node->hasCharacter()){
-				enemyNode = node;
-				break;
+		if (dynamic_cast<WanderingState *>(((Character *)FWApplication::GetInstance()->getCow())->mCurrentState)){
+			Node *enemyNode = nullptr;
+			for (size_t i = 0; i < mOwner->mCurrentLocation->mNeighbours.size(); i++){
+				Waypoint *waypoint = (Waypoint *)mOwner->mCurrentLocation->mNeighbours.at(i);
+				Node *node = waypoint->OtherNode(mOwner->mCurrentLocation);
+				if (node->hasCharacter()){
+					enemyNode = node;
+					break;
+				}
+			}
+
+			if (enemyNode != nullptr){
+				mOwner->changeState();
 			}
 		}
-
-		if (enemyNode != nullptr){
-			mOwner->changeState();
-		}
-
 
 		Waypoint *waypoint = nullptr;
 
