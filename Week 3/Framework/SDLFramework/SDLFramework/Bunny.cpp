@@ -8,9 +8,7 @@
 
 Bunny::Bunny(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mCurrentLocation = startNode;
-	mCurrentState = new WanderingState();
-	mCurrentState->mOwner = this;
-	SDL_SetTextureColorMod(texture, 255, 0, 255);
+	wander();
 	mStateChangeCounter = 5;
 }
 
@@ -26,18 +24,13 @@ void Bunny::move(){
 		if (mStateChangeCounter < 0){
 			changeState();
 			Character *cow = (Character *)FWApplication::GetInstance()->getCow();
-			cow->wakeup();
+			cow->wakeup((Character *)FWApplication::GetInstance()->getBunny());
 		}
 	}
 }
 
 void Bunny::flee(){
-	SDL_Texture *texture = getTexture();
-	// Flee state
-	mCurrentState = new FleeState();
-	mCurrentState->mOwner = this;
-	SDL_SetTextureColorMod(texture, 0, 0, 0);
-	mItem = nullptr;
+	Character::flee();
 	mStateChangeCounter = 5;
 	
 }
@@ -46,53 +39,41 @@ void Bunny::changeState(){
 	SDL_Texture *texture = getTexture();
 	if (dynamic_cast<WanderingState *>(mCurrentState)){
 		if (mCurrentLocation->mNeighbours.size() == 2){
-			// Flee state
-			mCurrentState = new FleeState();
-			mCurrentState->mOwner = this;
-			SDL_SetTextureColorMod(texture, 0, 0, 0);
-			mItem = nullptr;
+			flee();
 		}
 		else {
 			// Change of 50%
-			mCurrentState = new SearchState();
-			mCurrentState->mOwner = this;
 			int random = (0 + rand() % (int)2);
+			Item *item = nullptr;
+			int r, g, b = 0;
 			if (random == 0){
-				mCurrentState->mTarget = FWApplication::GetInstance()->getItem();
-				mItem = (Item *)mCurrentState->mTarget;
-				SDL_SetTextureColorMod(texture, 255, 255, 255);
+				item = (Item *)FWApplication::GetInstance()->getItem();
+				r = 255;
+				g = 255;
+				b = 255;
 			}
 			else {
-				mCurrentState->mTarget = FWApplication::GetInstance()->getWeapon();
-				mItem = (Item *)mCurrentState->mTarget;
-				SDL_SetTextureColorMod(texture, 200, 200, 200);
+				item = (Item *)FWApplication::GetInstance()->getWeapon();
+				r = 200;
+				g = 200;
+				b = 200;
 			}
+
+			search(item, r, g, b);
 		}
 	}
 	else if (dynamic_cast<FleeState *>(mCurrentState)){
-		mCurrentState = new WanderingState();
-		mCurrentState->mOwner = this;
-		SDL_SetTextureColorMod(texture, 255, 0, 255);
-		mItem = nullptr;
+		wander();
 	}
 	else if (dynamic_cast<SearchState *>(mCurrentState)){
 		if (mCurrentLocation->mItem == mCurrentState->mTarget){
-			mCurrentState = new ChaseState();
-			mCurrentState->mOwner = this;
-			mCurrentState->mTarget = FWApplication::GetInstance()->getCow();
-			SDL_SetTextureColorMod(texture, 0, 255, 0);
+			chase((Character *)FWApplication::GetInstance()->getCow());
 		}
 		else {
-			mCurrentState = new WanderingState();
-			mCurrentState->mOwner = this;
-			SDL_SetTextureColorMod(texture, 255, 0, 255);
-			mItem = nullptr;
+			wander();
 		}
 	}
 	else if (dynamic_cast<ChaseState *>(mCurrentState)){
-		mCurrentState = new WanderingState();
-		mCurrentState->mOwner = this;
-		SDL_SetTextureColorMod(texture, 255, 0, 255);
-		mItem = nullptr;
+		wander();
 	}
 }

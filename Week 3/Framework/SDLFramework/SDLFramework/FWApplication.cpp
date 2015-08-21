@@ -256,9 +256,8 @@ void FWApplication::handleEvent(){
 		if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
 			if (cow->mCurrentLocation->mCharacters.size() > 1){
 				if (bunny->mItem != nullptr && bunny->mItem->mIsWeapon){
-					
 					cow->sleep();
-					bunny->flee();
+					bunny->wander();
 				}
 				else {
 					// Check state of bunny

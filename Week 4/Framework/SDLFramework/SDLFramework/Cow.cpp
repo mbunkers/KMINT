@@ -6,10 +6,7 @@
 
 Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 	mCurrentLocation = startNode;
-	mCurrentState = new ChaseState();
-	mCurrentState->mTarget = FWApplication::GetInstance()->getBunny();
-	SDL_SetTextureColorMod(texture, 0, 255, 0);
-	mCurrentState->mOwner = this;
+	chase((Character *)FWApplication::GetInstance()->getBunny());
 
 	mVelocity = SVector2D(0, 0);
 	mHeading = SVector2D(1, 0);
@@ -30,27 +27,8 @@ Cow::Cow(SDL_Texture *texture, Node *startNode) : Character(texture){
 Cow::~Cow(){
 }
 
-//void Cow::Update(float deltaTime){
-//	move();
-//}
-
 void Cow::move(){
 	mCurrentState->Move(10);
-}
-
-void Cow::wakeup(){
-	SDL_Texture *texture = getTexture();
-	mCurrentState = new ChaseState();
-	mCurrentState->mTarget = FWApplication::GetInstance()->getBunny();
-	SDL_SetTextureColorMod(texture, 0, 255, 0);
-	mCurrentState->mOwner = this;
-}
-
-void Cow::sleep(){
-	SDL_Texture *texture = getTexture();
-	mCurrentState = new SleepState();
-	mCurrentState->mOwner = this;
-	SDL_SetTextureColorMod(texture, 100, 100, 100);
 }
 
 void Cow::changeState(){
@@ -82,12 +60,3 @@ void Cow::changeTarget(Character *target){
 	mCurrentState->setTarget(target);
 }
 
-Node* Cow::moveToNextLocation(Node *startNode, Node *targetNode){
-	reset(startNode, targetNode);
-	return mAStar->getNextNode();
-}
-
-void Cow::reset(Node *startNode, Node *targetNode){
-	delete mAStar;
-	mAStar = new AStar(startNode, targetNode);
-}

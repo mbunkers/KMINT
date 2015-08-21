@@ -21,6 +21,10 @@ public:
 	SteeringBehaviors(class Character *character);
 	~SteeringBehaviors();
 
+	class Character* target(){
+		return mTarget;
+	}
+
 	SVector2D seek(SVector2D targetPosition);
 	SVector2D flee(SVector2D targetPosition);
 	SVector2D persuit(class Character *target);

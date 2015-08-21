@@ -24,9 +24,13 @@ public:
 	void setNewPosition(int x, int y);
 	SDL_Texture *getTexture();
 	virtual void changeState();
-	virtual void sleep();
-	virtual void flee();
-	virtual void wakeup();
+	void sleep();
+	void wander();
+	void flee();
+	void wakeup();
+	void wakeup(Character *target);
+	void search(class Item *item, int r, int g, int b);
+	void chase(Character *target);
 	string StateName();
 };
 
