@@ -108,7 +108,6 @@ void Character::wander(){
 	mCurrentState = new WanderingState();
 	mCurrentState->mOwner = this;
 	SDL_SetTextureColorMod(texture, 255, 0, 255);
-	mItem = nullptr;
 }
 
 string Character::StateName(){

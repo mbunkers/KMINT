@@ -47,8 +47,13 @@ void SearchState::Move(){
 		mOwner->mCurrentLocation->setCharacter(mOwner);
 
 		if (mOwner->mCurrentLocation->mItem == target){
-			mOwner->chase((Character *)FWApplication::GetInstance()->getCow());
 			mOwner->mItem = (Item *)mTarget;
+			if (mOwner->mItem->mIsWeapon){
+				mOwner->chase((Character *)FWApplication::GetInstance()->getCow());
+			}
+			else {
+				mOwner->wander();
+			}
 		}
 	}
 }

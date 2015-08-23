@@ -14,7 +14,6 @@ public:
 	~Bunny();
 	void move();
 	void changeState();
-	void flee();
 	void Update(float deltaTime);
 };
 

@@ -18,21 +18,7 @@ Bunny::~Bunny(){
 
 void Bunny::move(){
 	mCurrentState->Move();
-	mStateChangeCounter--;
-
-	if (dynamic_cast<SleepState *>(((Character *)FWApplication::GetInstance()->getCow())->mCurrentState)){
-		if (mStateChangeCounter < 0){
-			changeState();
-			Character *cow = (Character *)FWApplication::GetInstance()->getCow();
-			cow->wakeup((Character *)FWApplication::GetInstance()->getBunny());
-		}
-	}
-}
-
-void Bunny::flee(){
-	Character::flee();
-	mStateChangeCounter = 5;
-	
+	mCurrentState->moveUpdate();
 }
 
 void Bunny::Update(float deltaTime){
@@ -46,32 +32,43 @@ void Bunny::Update(float deltaTime){
 						((Character *)FWApplication::GetInstance()->getCow())->respawn();
 						((Character *)FWApplication::GetInstance()->getCow())->chase(this);
 						wander();
+						mItem = nullptr;
 						break;
 					}
-				}
-			}
-			else {
-				if (mCurrentLocation->mCharacters.size() > 1){
-					((Character *)FWApplication::GetInstance()->getCow())->sleep();
-					wander();
 				}
 			}
 		}
 	}
 	else {
 		if (dynamic_cast<WanderingState *>(mCurrentState)){
-			Character *cow = (Character *)FWApplication::GetInstance()->getCow();
-			if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
-				for (size_t i = 0; i < mCurrentLocation->mNeighbours.size(); i++){
-					Waypoint *waypoint = (Waypoint *)mCurrentLocation->mNeighbours.at(i);
-					Node *node = waypoint->OtherNode(mCurrentLocation);
-					if (node->hasCharacter()){
-						changeState();
-						break;
+			if (mItem != nullptr){
+				if (mCurrentLocation->mCharacters.size() > 1){
+					Character *cow = (Character *)FWApplication::GetInstance()->getCow();
+					cow->sleep();
+					flee();
+					cow->mCurrentState->setReset(5);
+					mCurrentState->setReset(5);
+					mItem == nullptr;
+				}
+			}
+			else {
+				Character *cow = (Character *)FWApplication::GetInstance()->getCow();
+				if (dynamic_cast<ChaseState *>(cow->mCurrentState)){
+					for (size_t i = 0; i < mCurrentLocation->mNeighbours.size(); i++){
+						Waypoint *waypoint = (Waypoint *)mCurrentLocation->mNeighbours.at(i);
+						Node *node = waypoint->OtherNode(mCurrentLocation);
+						if (node->hasCharacter()){
+							changeState();
+							break;
+						}
 					}
 				}
 			}
 		}
+	}
+
+	if (mCurrentState->willReset()){
+		wander();
 	}
 }
 

@@ -10,6 +10,8 @@ using namespace std;
 class State{
 private:
 	string mName;
+	int mTurnsPassed = -1;
+	bool mCanReset = false;
 public:
 	State(string name);
 	~State();
@@ -24,6 +26,24 @@ public:
 
 	void setTarget(Character *target);
 	virtual string name();
+
+	void setReset(int turnsToReset){
+		mTurnsPassed = turnsToReset;
+		mCanReset = true;
+	}
+
+	void moveUpdate(){
+		if (canReset()){
+			mTurnsPassed--;
+		}
+	}
+
+	bool canReset(){
+		return mCanReset;
+	}
+	bool willReset(){
+		return mTurnsPassed == 0;
+	}
 };
 
 #endif

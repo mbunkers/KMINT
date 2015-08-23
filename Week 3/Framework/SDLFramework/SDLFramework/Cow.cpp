@@ -15,6 +15,7 @@ Cow::~Cow(){
 
 void Cow::move(){
 	mCurrentState->Move();
+	mCurrentState->moveUpdate();
 }
 
 void Cow::changeState(){
@@ -41,6 +42,10 @@ void Cow::Update(float deltaTime){
 				}
 			}
 		}
+	}
+
+	if (mCurrentState->willReset()){
+		chase((Character *)FWApplication::GetInstance()->getBunny());
 	}
 }
 
