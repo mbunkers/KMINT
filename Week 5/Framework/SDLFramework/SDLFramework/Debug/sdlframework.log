@@ -1,61 +1,9 @@
-﻿Build started 22/08/15 01:27:26.
+﻿Build started 25/08/15 10:59:00.
      1>Project "Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\SDLFramework\SDLFramework.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2-2.0.3/include" /I"Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2_ttf-2.0.12/include" /I"Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2_image-2.0.0/include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ASTar.cpp AStarNode.cpp Bunny.cpp Character.cpp ChaseState.cpp Cow.cpp FleeState.cpp FWApplication.cpp Generation.cpp HideState.cpp Instance.cpp InvincibleState.cpp Item.cpp Main.cpp MovingEntity.cpp Node.cpp SearchState.cpp SleepState.cpp State.cpp SteeringBehaviors.cpp WanderingState.cpp Waypoint.cpp
-         Waypoint.cpp
-         WanderingState.cpp
-         SteeringBehaviors.cpp
-         State.cpp
-         SleepState.cpp
-         SearchState.cpp
-         Node.cpp
-         MovingEntity.cpp
-         Main.cpp
-         Item.cpp
-         InvincibleState.cpp
-         Instance.cpp
-         HideState.cpp
-         Generation.cpp
-         FWApplication.cpp
-     1>z:\marcbunkers\avans\kmint\week 5\framework\sdlframework\sdlframework\fwapplication.cpp(420): warning C4244: 'initializing' : conversion from 'double' to 'Uint8', possible loss of data
-         FleeState.cpp
-         Cow.cpp
-         ChaseState.cpp
-         Character.cpp
-         Bunny.cpp
-         Generating Code...
-         Compiling...
-         AStarNode.cpp
-         ASTar.cpp
-         Generating Code...
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\Debug\SDLFramework.exe" /INCREMENTAL /NOLOGO /LIBPATH:"Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2-2.0.3/lib/x86" /LIBPATH:"Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2_ttf-2.0.12/lib/x86" /LIBPATH:"Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\SDLFramework\../../SDL2_image-2.0.0/lib/x86" SDL2.lib SDL2main.lib SDL2test.lib SDL2_ttf.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\Debug\SDLFramework.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\Debug\SDLFramework.lib" /MACHINE:X86 Debug\ASTar.obj
-         Debug\AStarNode.obj
-         Debug\Bunny.obj
-         Debug\Character.obj
-         Debug\ChaseState.obj
-         Debug\Cow.obj
-         Debug\FleeState.obj
-         Debug\FWApplication.obj
-         Debug\Generation.obj
-         Debug\HideState.obj
-         Debug\Instance.obj
-         Debug\InvincibleState.obj
-         Debug\Item.obj
-         Debug\Main.obj
-         Debug\MovingEntity.obj
-         Debug\Node.obj
-         Debug\SearchState.obj
-         Debug\SleepState.obj
-         Debug\State.obj
-         Debug\SteeringBehaviors.obj
-         Debug\WanderingState.obj
-         Debug\Waypoint.obj
-         LINK : Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\Debug\SDLFramework.exe not found or not built by the last incremental link; performing full link
-     1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>Link:
          SDLFramework.vcxproj -> Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\Debug\SDLFramework.exe
      1>Done Building Project "Z:\marcbunkers\Avans\KMINT\Week 5\Framework\SDLFramework\SDLFramework\SDLFramework.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:01:27.48
+Time Elapsed 00:00:01.37

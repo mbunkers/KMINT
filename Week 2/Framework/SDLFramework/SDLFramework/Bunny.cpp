@@ -20,7 +20,7 @@ void Bunny::move(){
 
 void Bunny::changeState(){
 	if (dynamic_cast<WanderingState *>(mCurrentState)){
-		mCurrentState = new SpeedWanderingState();
+		//mCurrentState = new SpeedWanderingState();
 	}
 	else {
 		if (dynamic_cast<SpeedWanderingState *>(mCurrentState)){
